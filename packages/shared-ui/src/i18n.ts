@@ -1,0 +1,52 @@
+export type Language = 'he' | 'en';
+
+export const copy = {
+  en: {
+    lab: 'Avatar Lab', studio: 'Character studio', stream: 'Event stream', contract: 'Rig contract',
+    subtitle: 'A little presence. A lot of possibility.', local: 'Local runtime', offline: 'No AI connected',
+    foundation: 'FOUNDATION / 01', build: 'Developer build', reset: 'Reset rig', tour: 'Run a sequence', stopTour: 'Stop sequence',
+    state: 'Conversation state', stateHelp: 'How the companion is showing up.', emotion: 'Emotion', intensity: 'Intensity',
+    energy: 'Speech energy', energyHelp: 'Drive the mouth with a normalized audio signal.', gaze: 'Attention & gaze',
+    track: 'Follow cursor', gazeHelp: 'Drag here to direct attention.', gesturesTitle: 'A little body language',
+    motion: 'Motion', pause: 'Pause', resume: 'Resume', reduced: 'Reduced motion', stage: 'Stage', mist: 'Mist', dusk: 'Dusk', paper: 'Paper',
+    rig: 'Developer rig', rigTag: 'ORIGINAL RIVE ARTBOARD', presence: 'Made to feel present.',
+    stageHelp: 'Move closer. Make eye contact. Give a little click.', alive: 'Local life is running', paused: 'Motion paused',
+    loading: 'Waking up the rig…', ready: 'Rive ready', failed: 'The Rive rig could not load.', retry: 'Try again',
+    frames: 'Frame rate', frameTime: 'Frame interval', renderTime: 'Render time', uptime: 'Session time',
+    live: 'Live diagnostics', latest: 'Latest events', clear: 'Clear', export: 'Export JSON', noEvents: 'No events yet. Try a state or gesture.',
+    allEvents: 'Everything the body hears.', streamHelp: 'Semantic inputs and local interactions, captured in this session only.',
+    rigTitle: 'One contract. Any character.', contractHelp: 'The application speaks in intent. Only the Rive adapter knows the artwork.',
+    field: 'Semantic output', value: 'Live value', purpose: 'Purpose', closeInspector: 'Hide inspector', openInspector: 'Show inspector',
+    connection: 'Deterministic engine', noKeys: 'No keys. No network. Just a little life.',
+    controls: 'Character controls', snapshot: 'Export pose', keyboard: 'I idle · L listen · T think · S speak · A act · Z sleep · R reset',
+    pose: 'Direct rig controls', auto: 'AUTO', manual: 'MANUAL', clearPose: 'Restore automatic controls', poseHelp: 'Developer overrides apply after the local engine. Changing a slider overrides only that channel.',
+    headTilt: 'Head tilt', eyeOpenness: 'Eye open', mouthOpen: 'Mouth open', smile: 'Smile', frown: 'Frown', gazeX: 'Gaze X', gazeY: 'Gaze Y', awake: 'Awake',
+    states: { idle: 'Idle', listening: 'Listening', thinking: 'Thinking', speaking: 'Speaking', acting: 'Acting', sleeping: 'Sleeping' },
+    emotions: { neutral: 'Neutral', happy: 'Happy', excited: 'Excited', curious: 'Curious', concerned: 'Concerned', surprised: 'Surprised', empathetic: 'Empathetic', amused: 'Amused', focused: 'Focused', confused: 'Confused' },
+    gestures: { nod: 'Nod', shake_head: 'Shake', head_tilt: 'Tilt', wave: 'Wave', bounce: 'Bounce', celebrate: 'Celebrate', shrug: 'Shrug' }
+  },
+  he: {
+    lab: 'מעבדת הדמות', studio: 'סטודיו לדמות', stream: 'יומן אירועים', contract: 'חוזה הדמות',
+    subtitle: 'נוכחות קטנה. עולם של אפשרויות.', local: 'מנוע מקומי', offline: 'ללא חיבור ל־AI',
+    foundation: 'תשתית / 01', build: 'גרסת פיתוח', reset: 'איפוס הדמות', tour: 'הפעלת רצף', stopTour: 'עצירת הרצף',
+    state: 'מצב השיחה', stateHelp: 'איך הדמות נוכחת ברגע הזה.', emotion: 'רגש', intensity: 'עוצמה',
+    energy: 'עוצמת הדיבור', energyHelp: 'תנועת הפה מגיבה לעוצמת האודיו.', gaze: 'קשב ומבט',
+    track: 'מעקב אחר הסמן', gazeHelp: 'אפשר לגרור כאן כדי לכוון את המבט.', gesturesTitle: 'קצת שפת גוף',
+    motion: 'תנועה', pause: 'השהיה', resume: 'המשך', reduced: 'תנועה מופחתת', stage: 'רקע', mist: 'ערפל', dusk: 'דמדומים', paper: 'נייר',
+    rig: 'דמות פיתוח', rigTag: 'דמות RIVE מקורית', presence: 'קטנה, אבל נוכחת.',
+    stageHelp: 'התקרבו. צרו קשר עין. נסו ללחוץ בעדינות.', alive: 'מנוע החיים המקומי פועל', paused: 'התנועה מושהית',
+    loading: 'הדמות מתעוררת…', ready: 'Rive מוכן', failed: 'לא הצלחנו לטעון את הדמות.', retry: 'ניסיון נוסף',
+    frames: 'קצב פריימים', frameTime: 'זמן בין פריימים', renderTime: 'זמן ציור', uptime: 'זמן פעילות',
+    live: 'מדדים בזמן אמת', latest: 'אירועים אחרונים', clear: 'ניקוי', export: 'ייצוא JSON', noEvents: 'עדיין אין אירועים. נסו מצב או מחווה.',
+    allEvents: 'כל מה שהגוף שומע.', streamHelp: 'הוראות לדמות ופעולות מקומיות, מההפעלה הנוכחית בלבד.',
+    rigTitle: 'חוזה אחד. כל דמות.', contractHelp: 'האפליקציה מביעה כוונה. רק מתאם Rive מכיר את פרטי האיור.',
+    field: 'פלט סמנטי', value: 'ערך נוכחי', purpose: 'תפקיד', closeInspector: 'הסתרת הבקרות', openInspector: 'הצגת הבקרות',
+    connection: 'מנוע דטרמיניסטי', noKeys: 'בלי מפתחות. בלי רשת. רק קצת חיים.',
+    controls: 'בקרות הדמות', snapshot: 'ייצוא תנוחה', keyboard: 'I מנוחה · L הקשבה · T חשיבה · S דיבור · A פעולה · Z שינה · R איפוס',
+    pose: 'בקרות ישירות של הדמות', auto: 'אוטומטי', manual: 'ידני', clearPose: 'חזרה לבקרות אוטומטיות', poseHelp: 'בקרות פיתוח שפועלות אחרי המנוע המקומי. שינוי מחוון עוקף רק את הערוץ שלו.',
+    headTilt: 'הטיית ראש', eyeOpenness: 'פתיחת עיניים', mouthOpen: 'פתיחת הפה', smile: 'חיוך', frown: 'הבעה מודאגת', gazeX: 'מבט X', gazeY: 'מבט Y', awake: 'ערנות',
+    states: { idle: 'מנוחה', listening: 'הקשבה', thinking: 'חשיבה', speaking: 'דיבור', acting: 'פעולה', sleeping: 'שינה' },
+    emotions: { neutral: 'ניטרלי', happy: 'שמח', excited: 'נרגש', curious: 'סקרן', concerned: 'מודאג', surprised: 'מופתע', empathetic: 'אמפתי', amused: 'משועשע', focused: 'ממוקד', confused: 'מבולבל' },
+    gestures: { nod: 'הנהון', shake_head: 'לא', head_tilt: 'הטיה', wave: 'נפנוף', bounce: 'קפיצה', celebrate: 'חגיגה', shrug: 'משיכת כתפיים' }
+  }
+} as const;

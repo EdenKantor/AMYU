@@ -1,0 +1,11 @@
+{
+  "name": "@amyu/avatar-rive",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "@amyu/avatar-contract": "workspace:*",
+    "@rive-app/canvas-advanced": "2.44.0"
+  }
+}

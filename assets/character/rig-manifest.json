@@ -1,0 +1,148 @@
+{
+  "version": 1,
+  "rig": "amyu-developer",
+  "artboard": "AMYU Developer",
+  "stateMachine": "AMYU Developer",
+  "format": "Rive 7.0",
+  "provenance": "Original vector character created by scripts/build-character.mjs. No external art, images, or fonts.",
+  "inputs": [
+    {
+      "name": "bodyX",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "bodyY",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "bodyRotate",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "bodyScaleX",
+      "min": 0,
+      "max": 2,
+      "initial": 1
+    },
+    {
+      "name": "bodyScaleY",
+      "min": 0,
+      "max": 2,
+      "initial": 1
+    },
+    {
+      "name": "headX",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "headY",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "headTilt",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "gazeX",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "gazeY",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "eyeOpen",
+      "min": 0,
+      "max": 1.5,
+      "initial": 1
+    },
+    {
+      "name": "eyeScale",
+      "min": 0,
+      "max": 2,
+      "initial": 1
+    },
+    {
+      "name": "browRaise",
+      "min": 0,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "browTilt",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "mouthOpen",
+      "min": 0,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "mouthWidth",
+      "min": 0,
+      "max": 2,
+      "initial": 1
+    },
+    {
+      "name": "smile",
+      "min": -1,
+      "max": 1,
+      "initial": 0.2
+    },
+    {
+      "name": "leftArm",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "rightArm",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "armLift",
+      "min": 0,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "feet",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "antenna",
+      "min": -1,
+      "max": 1,
+      "initial": 0
+    },
+    {
+      "name": "shadow",
+      "min": 0,
+      "max": 2,
+      "initial": 1
+    }
+  ]
+}

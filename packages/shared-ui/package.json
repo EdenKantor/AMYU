@@ -1,0 +1,14 @@
+{
+  "name": "@amyu/shared-ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts", "./styles.css": "./src/styles.css" },
+  "dependencies": {
+    "@amyu/avatar-contract": "workspace:*",
+    "@amyu/avatar-rive": "workspace:*",
+    "@amyu/embodiment": "workspace:*",
+    "@amyu/observability": "workspace:*",
+    "react": "19.2.0"
+  }
+}

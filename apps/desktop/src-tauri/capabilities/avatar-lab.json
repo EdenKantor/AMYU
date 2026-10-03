@@ -1,0 +1,8 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "avatar-lab",
+  "description": "Local Avatar Lab: metadata diagnostics only, no executable device operations.",
+  "local": true,
+  "windows": ["avatar-lab"],
+  "permissions": ["allow-native-diagnostics"]
+}

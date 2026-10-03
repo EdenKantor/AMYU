@@ -1,0 +1,7 @@
+packages:
+  - apps/*
+  - packages/*
+  - providers/*
+allowBuilds:
+  esbuild: true
+storeDir: work/pnpm-store
