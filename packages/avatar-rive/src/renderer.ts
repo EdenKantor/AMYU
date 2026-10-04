@@ -1,9 +1,11 @@
 import RiveCanvas from '@rive-app/canvas-advanced';
 import wasmUrl from '@rive-app/canvas-advanced/rive.wasm?url';
-import characterUrl from '../../../assets/character/amyu-developer.riv?url';
+import characterUrl from '../../../assets/character/third-party/expressive-floating.riv?url';
 import { clamp, type AvatarFrame } from '@amyu/avatar-contract';
-import { developerRig, diagnoseMappings, verifiedCapabilities, type RiveRigAdapter } from './rig';
-import { inspectRiveFile, type MappingDiagnostic, type RiveAssetInfo } from './inspection';
+import { diagnoseMappings, verifiedCapabilities, type RiveRigAdapter } from './rig';
+import { inspectRiveFile, type AnimationMappingDiagnostic, type MappingDiagnostic, type RiveAssetInfo } from './inspection';
+import { expressiveFloatingRig } from './expressive-floating';
+import { diagnoseAnimationMappings, RiveAnimationMixer } from './animations';
 
 type Runtime = Awaited<ReturnType<typeof RiveCanvas>>;
 type RiveFile = Awaited<ReturnType<Runtime['load']>>;
@@ -45,6 +47,8 @@ export class RiveAvatarRenderer {
   private artboard?: Artboard;
   private machine?: Machine;
   private renderer?: Renderer;
+  private animationMixer?: RiveAnimationMixer;
+  private animationDiagnostics: AnimationMappingDiagnostic[] = [];
   private inputs = new Map<string, NumberInput>();
   private disposed = false;
   private lastFrameTime?: number;
@@ -55,6 +59,7 @@ export class RiveAvatarRenderer {
 
   get assetInfo(): RiveAssetInfo { return this.info; }
   get mappingDiagnostics(): readonly MappingDiagnostic[] { return this.diagnostics; }
+  get animationMappingDiagnostics(): readonly AnimationMappingDiagnostic[] { return this.animationDiagnostics; }
   get capabilities(): RiveAssetInfo['capabilities'] { return this.info.capabilities; }
 
   private constructor(
@@ -67,7 +72,7 @@ export class RiveAvatarRenderer {
   }
 
   static async create(canvas: HTMLCanvasElement, options: RiveAvatarOptions = {}): Promise<RiveAvatarRenderer> {
-    const instance = new RiveAvatarRenderer(canvas, options.adapter ?? developerRig, options.onStats);
+    const instance = new RiveAvatarRenderer(canvas, options.adapter ?? expressiveFloatingRig, options.onStats);
     try {
       options.signal?.throwIfAborted();
       const [runtime, response] = await Promise.all([
@@ -96,13 +101,17 @@ export class RiveAvatarRenderer {
       const discovered = inspectRiveFile(runtime, instance.file);
       const activeInputs = discovered.stateMachines.find((item) => item.artboard === instance.adapter.artboard && item.name === instance.adapter.stateMachine)?.inputs ?? [];
       instance.info = {
+        attribution: instance.adapter.attribution, framing: instance.adapter.framing,
         renderer: 'Rive Canvas2D', runtimeVersion: '2.44.0', assetUrl: options.assetUrl ?? characterUrl,
         adapterId: instance.adapter.id, artboard: instance.adapter.artboard,
         stateMachine: definition ? instance.adapter.stateMachine : null, viewModel: null,
         ...discovered, inputs: activeInputs,
-        capabilities: verifiedCapabilities(instance.adapter, activeInputs),
+        capabilities: verifiedCapabilities(instance.adapter, activeInputs, discovered.animations),
+        animationMappings: diagnoseAnimationMappings(instance.adapter, discovered.animations),
       };
       instance.diagnostics = diagnoseMappings(instance.adapter, activeInputs);
+      instance.animationDiagnostics = instance.info.animationMappings;
+      instance.animationMixer = new RiveAnimationMixer(runtime, instance.artboard, instance.adapter);
       instance.renderer = runtime.makeRenderer(canvas);
       instance.artboard.advance(0);
       instance.resize();
@@ -115,6 +124,10 @@ export class RiveAvatarRenderer {
 
   getMappingDiagnostics(frame: AvatarFrame): MappingDiagnostic[] {
     return diagnoseMappings(this.adapter, this.info.inputs, frame, this.previousFrame);
+  }
+
+  getAnimationMappingDiagnostics(frame: AvatarFrame): AnimationMappingDiagnostic[] {
+    return diagnoseAnimationMappings(this.adapter, this.info.animations, frame);
   }
 
   /** A local semantic reaction; callers never know the artwork's trigger name. */
@@ -154,7 +167,14 @@ export class RiveAvatarRenderer {
       if (input?.type === 58) input.fire();
     }
     this.pendingTriggers.clear();
+    this.animationDiagnostics = this.getAnimationMappingDiagnostics(frame);
+    this.animationMixer?.apply(this.animationDiagnostics, elapsed, 'baseline');
     this.machine?.advanceAndApply(elapsed);
+    // Reassert deterministic authored baseline after native SM clocks. This also
+    // resets any clip targets not driven by that native state's animation.
+    this.animationMixer?.resetToRest();
+    this.animationMixer?.apply(this.animationDiagnostics, 0, 'baseline');
+    this.animationMixer?.apply(this.animationDiagnostics, elapsed, 'overlay');
     this.artboard.advance(elapsed);
     const advanced = performance.now();
     this.renderer.clear();
@@ -164,7 +184,7 @@ export class RiveAvatarRenderer {
         this.runtime.Fit.contain,
         this.runtime.Alignment.center,
         { minX: 0, minY: 0, maxX: this.canvas.width, maxY: this.canvas.height },
-        this.artboard.bounds,
+        this.adapter.framing?.bounds ?? this.artboard.bounds,
       );
       this.artboard.draw(this.renderer);
       this.renderer.restore();
@@ -185,6 +205,9 @@ export class RiveAvatarRenderer {
     this.inputs.clear();
     this.pendingTriggers.clear();
     this.previousFrame = undefined;
+    this.animationMixer?.dispose();
+    this.animationMixer = undefined;
+    this.animationDiagnostics = [];
     this.machine?.delete();
     this.artboard?.delete();
     this.file?.unref();

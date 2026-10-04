@@ -85,6 +85,12 @@ describe('EmbodimentDirector', () => {
     director.setSpeechEnergy(0.9);
     expect(advance(director, 1000).mouthOpen).toBeGreaterThan(0.85);
     director.setConversationState('listening');
+    const pausedClock = director.getSnapshot();
+    expect(pausedClock.state).toBe('listening');
+    expect(pausedClock.awake).toBe(true);
+    expect(pausedClock.speechEnergy).toBe(0);
+    expect(pausedClock.mouthOpen).toBe(0);
+    expect(pausedClock.stateWeights.speaking).toBeGreaterThan(0.9);
     expect(director.tick(16).mouthOpen).toBe(0);
     expect(director.getSnapshot().stateWeights.speaking).toBeGreaterThan(0.8);
   });

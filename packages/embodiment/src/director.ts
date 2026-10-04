@@ -74,6 +74,7 @@ export class EmbodimentDirector implements AvatarController {
     this.state = state;
     // Interruptions must stop mouth energy immediately even while posture blends out.
     if (state !== 'speaking') { this.speechTarget = 0; this.speechEnergy = 0; }
+    this.refreshSemanticSnapshot(state !== 'speaking');
   }
 
   setEmotion(emotion: Emotion, intensity: number): void {
@@ -131,6 +132,18 @@ export class EmbodimentDirector implements AvatarController {
     this.manualGaze = null; this.pointer = null;
     this.gestureQueue = []; this.activeGesture = null;
     this.clickTimes = []; this.clickResponse = 0; this.playfulConfusion = 0;
+    this.refreshSemanticSnapshot(true);
+    this.snapshot = { ...this.snapshot, gesture: null };
+  }
+
+  /** Semantic interruption works even when the caller has paused the animation clock. */
+  private refreshSemanticSnapshot(restSpeech: boolean): void {
+    const awake = this.state !== 'sleeping';
+    const restMouth = awake ? this.snapshot.emotionWeights.surprised * 0.12 * (1 - this.stateBlend.sleeping * 0.95) : 0;
+    this.snapshot = {
+      ...this.snapshot, state: this.state, awake, speechEnergy: this.speechEnergy,
+      mouthOpen: restSpeech ? restMouth : this.snapshot.mouthOpen,
+    };
   }
 
   /** Clock is caller-owned. A resumed tab never replays minutes of hidden motion. */

@@ -1,6 +1,7 @@
 import { EmbodimentDirector } from '@amyu/embodiment';
 import type { AvatarFrame, ConversationState, Emotion, Gesture } from '@amyu/avatar-contract';
 import { LatencyMetrics } from '@amyu/observability';
+import { DemoTimeline, type DemoKind, type DemoStatus } from './demo';
 
 export interface LabEvent { id: number; at: number; type: string; detail: string }
 
@@ -21,22 +22,26 @@ export class LabSession {
   private nextId = 0;
   private hovered = false;
   private lastAwakeState: Exclude<ConversationState, 'sleeping'> = 'idle';
-  private tourIndex = -1;
-  private tourElapsed = 0;
+  private timeline: DemoTimeline | null = null;
   private pendingStateMetric?: () => number;
   private pendingAffectMetric?: () => number;
 
   constructor() { this.log('runtime.ready', 'Local life engine initialized'); }
   get frame(): AvatarFrame { return { ...this.director.getSnapshot(), ...this.poseOverrides }; }
-  get touring(): boolean { return this.tourIndex >= 0; }
+  get demo(): DemoStatus | null { return this.timeline?.snapshot() ?? null; }
+  get touring(): boolean { return this.timeline?.kind === 'states'; }
   tick(deltaMs: number): AvatarFrame {
     if (this.paused) return this.frame;
     const delta = Math.min(64, Math.max(0, Number.isFinite(deltaMs) ? deltaMs : 0));
     this.elapsedMs += delta;
-    if (this.touring) {
-      this.tourElapsed += delta;
-      if (this.state === 'speaking') { this.speechEnergy = 0.3 + Math.abs(Math.sin(this.elapsedMs / 140)) * 0.6; this.director.setSpeechEnergy(this.speechEnergy); }
-      if (this.tourElapsed >= 2200) { this.tourElapsed = 0; this.advanceTour(); }
+    if (this.timeline) {
+      const sample = this.timeline.advance(delta);
+      if (sample.phase !== this.state) this.applyState(sample.phase);
+      this.applySpeechEnergy(sample.speechEnergy);
+      if (sample.done) {
+        this.timeline = null;
+        this.log('demo.completed', sample.kind);
+      }
     }
     const frame = this.director.tick(delta);
     this.pendingStateMetric?.(); this.pendingStateMetric = undefined;
@@ -44,6 +49,10 @@ export class LabSession {
     return { ...frame, ...this.poseOverrides };
   }
   setState(state: ConversationState): void {
+    this.cancelDemo('manual state');
+    this.applyState(state);
+  }
+  private applyState(state: ConversationState): void {
     this.state = state;
     if (state !== 'sleeping') this.lastAwakeState = state;
     if (state !== 'speaking') this.speechEnergy = 0;
@@ -52,6 +61,7 @@ export class LabSession {
     this.log('conversation.state', state);
   }
   setAwake(awake: boolean): void {
+    this.cancelDemo('awake control');
     if (!awake && this.state !== 'sleeping') this.lastAwakeState = this.state;
     this.director.setAwake(awake);
     this.state = awake ? this.lastAwakeState : 'sleeping';
@@ -69,7 +79,11 @@ export class LabSession {
     this.director.setEmotion(this.emotion, this.intensity);
   }
   setSpeechEnergy(value: number): void {
-    this.speechEnergy = Math.max(0, Math.min(1, value));
+    this.cancelDemo('manual speech energy');
+    this.applySpeechEnergy(value);
+  }
+  private applySpeechEnergy(value: number): void {
+    this.speechEnergy = Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
     this.director.setSpeechEnergy(this.speechEnergy);
   }
   gesture(gesture: Gesture): void {
@@ -100,6 +114,7 @@ export class LabSession {
     this.director.setGaze(x, y);
   }
   setPoseOverride(field: keyof LabSession['poseOverrides'], value: number): void {
+    this.cancelDemo('manual pose');
     const min = field === 'headTilt' ? -1 : 0;
     this.poseOverrides[field] = Math.min(1, Math.max(min, Number.isFinite(value) ? value : 0));
     this.log('rig.override', `${field} = ${this.poseOverrides[field]?.toFixed(2)}`);
@@ -116,7 +131,7 @@ export class LabSession {
     this.log('runtime.reduced_motion', String(value));
   }
   reset(): void {
-    this.tourIndex = -1;
+    this.cancelDemo('reset');
     this.paused = false;
     this.state = 'idle';
     this.lastAwakeState = 'idle';
@@ -131,30 +146,41 @@ export class LabSession {
     this.log('runtime.reset', 'Idle · neutral · cursor attention');
   }
   toggleTour(): void {
-    if (this.touring) { this.reset(); return; }
+    if (this.touring) this.stopDemo();
+    else this.playStateDemo();
+  }
+  playSpeakingDemo(): void { this.startDemo('speaking'); }
+  playStateDemo(): void { this.startDemo('states'); }
+  stopDemo(): void {
+    this.cancelDemo('stop');
+    this.applyState('idle');
+    this.applySpeechEnergy(0);
+  }
+  private startDemo(kind: DemoKind): void {
+    this.cancelDemo('restart');
     this.paused = false;
-    this.tourIndex = 0;
-    this.tourElapsed = 0;
-    this.applyTourStep();
-    this.log('scenario.started', 'Six states · local deterministic sequence');
+    this.poseOverrides = {};
+    this.director.resetToIdle();
+    this.director.setEmotion(this.emotion, this.intensity);
+    this.timeline = new DemoTimeline(kind);
+    const first = this.timeline.snapshot();
+    this.applyState(first.phase);
+    this.applySpeechEnergy(0);
+    this.log('demo.started', kind === 'speaking' ? 'Speaking · 8s synthetic visual envelope · no audio' : 'Idle 2s · Listening 3s · Thinking 3s · Speaking 5s · Idle 2s');
+  }
+  private cancelDemo(reason: string): void {
+    if (!this.timeline) return;
+    const kind = this.timeline.kind;
+    this.timeline = null;
+    // Interrupt cached speech even while motion is paused, then preserve the selected state.
+    // The caller may choose idle or another state after cancellation; affect is untouched.
+    this.director.setConversationState('idle');
+    this.director.setConversationState(this.state);
+    this.applySpeechEnergy(0);
+    this.log('demo.cancelled', `${kind} · ${reason}`);
   }
   clearEvents(): void { this.events = []; }
   log(type: string, detail: string): void {
     this.events = [{ id: this.nextId++, at: this.elapsedMs, type, detail }, ...this.events].slice(0, 120);
-  }
-  private advanceTour(): void {
-    this.tourIndex++;
-    if (this.tourIndex >= 6) { this.reset(); this.log('scenario.completed', 'All six conversation states exercised'); }
-    else this.applyTourStep();
-  }
-  private applyTourStep(): void {
-    const steps: [ConversationState, Emotion, Gesture][] = [
-      ['idle', 'neutral', 'bounce'], ['listening', 'curious', 'head_tilt'],
-      ['thinking', 'focused', 'shrug'], ['speaking', 'happy', 'nod'],
-      ['acting', 'excited', 'wave'], ['sleeping', 'neutral', 'nod']
-    ];
-    const [state, emotion, gesture] = steps[this.tourIndex];
-    this.setState(state); this.setEmotion(emotion); this.gesture(gesture);
-    if (state !== 'speaking') this.director.setSpeechEnergy(0);
   }
 }

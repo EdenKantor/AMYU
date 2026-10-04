@@ -16,7 +16,24 @@ export interface MappingDiagnostic {
   reason?: string;
   value?: number | boolean;
 }
+export interface AnimationMappingDiagnostic {
+  control: string;
+  animation: string;
+  status: 'MAPPED' | 'UNMAPPED';
+  mix: number;
+  progress?: number;
+  reason?: string;
+}
+export interface RiveAssetAttribution {
+  title: string; creator: string; sourceUrl: string; license: string; licenseUrl: string;
+}
+export interface RiveFraming {
+  bounds: { minX: number; minY: number; maxX: number; maxY: number };
+  source: string;
+}
 export interface RiveAssetInfo {
+  framing?: RiveFraming;
+  attribution?: RiveAssetAttribution;
   renderer: 'Rive Canvas2D';
   runtimeVersion: string;
   assetUrl: string;
@@ -28,6 +45,7 @@ export interface RiveAssetInfo {
   stateMachines: Array<{ artboard: string; name: string; inputs: DiscoveredRiveInput[] }>;
   inputs: DiscoveredRiveInput[];
   animations: Array<{ artboard: string; name: string }>;
+  animationMappings: AnimationMappingDiagnostic[];
   viewModels: Array<{ name: string; properties: DiscoveredViewModelProperty[]; instances: string[] }>;
   bindings: { status: 'unknown'; note: string };
   availableStates: { status: 'unknown'; names: string[]; note: string };

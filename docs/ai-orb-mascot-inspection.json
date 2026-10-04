@@ -1,0 +1,81 @@
+{
+  "artboards": [
+    "Artboard"
+  ],
+  "stateMachines": [
+    {
+      "artboard": "Artboard",
+      "name": "State Machine 1",
+      "inputs": []
+    }
+  ],
+  "animations": [
+    {
+      "artboard": "Artboard",
+      "name": "Lading"
+    },
+    {
+      "artboard": "Artboard",
+      "name": "Idle"
+    },
+    {
+      "artboard": "Artboard",
+      "name": "Typing"
+    },
+    {
+      "artboard": "Artboard",
+      "name": "Correct"
+    },
+    {
+      "artboard": "Artboard",
+      "name": "Wrong"
+    },
+    {
+      "artboard": "Artboard",
+      "name": "Jump"
+    },
+    {
+      "artboard": "Artboard",
+      "name": "Reveal"
+    }
+  ],
+  "viewModels": [
+    {
+      "name": "ViewModel1",
+      "properties": [
+        {
+          "name": "wrong",
+          "type": "trigger"
+        },
+        {
+          "name": "correct",
+          "type": "trigger"
+        },
+        {
+          "name": "jump",
+          "type": "trigger"
+        },
+        {
+          "name": "loadingBoolean",
+          "type": "boolean"
+        },
+        {
+          "name": "typingBoolean",
+          "type": "boolean"
+        }
+      ],
+      "instances": [
+        "Instance"
+      ]
+    }
+  ],
+  "bindings": {
+    "status": "unknown",
+    "note": "Rive 2.44.0 exposes ViewModel properties but cannot enumerate which artwork properties are bound to them."
+  },
+  "availableStates": {
+    "status": "unknown",
+    "names": [],
+    "note": "Rive 2.44.0 does not expose a complete state/layer enumeration. Animation names are listed separately."
+  }
+}

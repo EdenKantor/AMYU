@@ -1,0 +1,43 @@
+{
+  "artboards": ["Artboard"],
+  "stateMachines": [
+    {
+      "artboard": "Artboard",
+      "name": "State Machine 1",
+      "inputs": [
+        { "name": "isTalking", "type": "boolean", "typeId": 59 },
+        { "name": "isListening", "type": "boolean", "typeId": 59 }
+      ]
+    }
+  ],
+  "animations": [
+    { "artboard": "Artboard", "name": "idle" },
+    { "artboard": "Artboard", "name": "Empty" },
+    { "artboard": "Artboard", "name": "Listening" },
+    { "artboard": "Artboard", "name": "Talking" },
+    { "artboard": "Artboard", "name": "Waving" },
+    { "artboard": "Artboard", "name": "Thinking" },
+    { "artboard": "Artboard", "name": "DrawOrderLH" },
+    { "artboard": "Artboard", "name": "Mouth-talk" },
+    { "artboard": "Artboard", "name": "Mouth-smile" },
+    { "artboard": "Artboard", "name": "Mouth-normal" },
+    { "artboard": "Artboard", "name": "EYE-right-close" },
+    { "artboard": "Artboard", "name": "EYE-right-open" },
+    { "artboard": "Artboard", "name": "EYES-open" },
+    { "artboard": "Artboard", "name": "EYES-close" },
+    { "artboard": "Artboard", "name": "EYE-left-open" },
+    { "artboard": "Artboard", "name": "EYE-left-close" },
+    { "artboard": "Artboard", "name": "Blink-left" },
+    { "artboard": "Artboard", "name": "Blink-bottom-left" }
+  ],
+  "viewModels": [],
+  "bindings": {
+    "status": "unknown",
+    "note": "Rive 2.44.0 exposes ViewModel properties but cannot enumerate which artwork properties are bound to them."
+  },
+  "availableStates": {
+    "status": "unknown",
+    "names": [],
+    "note": "Rive 2.44.0 does not expose a complete state/layer enumeration. Animation names are listed separately."
+  }
+}

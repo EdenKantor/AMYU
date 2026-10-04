@@ -1,5 +1,5 @@
 import { clamp, createAvatarCapabilities, type AvatarCapabilities, type AvatarFrame, type Gesture } from '@amyu/avatar-contract';
-import type { DiscoveredRiveInput, MappingDiagnostic, RiveInputType } from './inspection';
+import type { DiscoveredRiveInput, MappingDiagnostic, RiveAssetAttribution, RiveFraming, RiveInputType } from './inspection';
 
 export interface NumericRiveInputSpec {
   name: string;
@@ -16,12 +16,27 @@ export type RiveInputSpec = NumericRiveInputSpec | {
 export type CapabilityName = Exclude<keyof AvatarCapabilities, 'gestures'> | `gesture:${Gesture}`;
 export type RiveInputValues = Record<string, number | boolean>;
 
+export interface RiveAnimationSpec {
+  name: string; control: string; mode: 'loop' | 'pose' | 'gesture';
+  stage?: 'baseline' | 'overlay';
+  playbackRange?: readonly [number, number];
+  speed?: number;
+  resetAtRest?: number;
+}
+export interface RiveAnimationValue { mix: number; progress?: number }
+export type RiveAnimationValues = Record<string, RiveAnimationValue>;
+
 /** Only this adapter knows names inside the replaceable character artwork. */
 export interface RiveRigAdapter {
   id: string;
+  attribution?: RiveAssetAttribution;
+  framing?: RiveFraming;
   artboard: string;
   stateMachine: string;
   inputs: readonly RiveInputSpec[];
+  animations?: readonly RiveAnimationSpec[];
+  mapAnimations?(frame: AvatarFrame): RiveAnimationValues;
+  animationCapabilityRequirements?: Partial<Record<CapabilityName, readonly string[]>>;
   capabilities: AvatarCapabilities;
   capabilityRequirements?: Partial<Record<CapabilityName, readonly string[]>>;
   mapFrame(frame: AvatarFrame, previous?: AvatarFrame): RiveInputValues;
@@ -116,13 +131,20 @@ export const developerRig: RiveRigAdapter = {
 };
 
 /** Declared visual support is downgraded when actual controls are absent/wrong-type. */
-export function verifiedCapabilities(adapter: RiveRigAdapter, discovered: readonly DiscoveredRiveInput[]): AvatarCapabilities {
+export function verifiedCapabilities(adapter: RiveRigAdapter, discovered: readonly DiscoveredRiveInput[], animations: readonly { artboard: string; name: string }[] = []): AvatarCapabilities {
   const result = createAvatarCapabilities(adapter.capabilities);
   const actual = new Map(discovered.map(({ name, type }) => [name, type]));
   const expected = new Map(adapter.inputs.map(({ name, type }) => [name, type as RiveInputType]));
   for (const [capability, required] of Object.entries(adapter.capabilityRequirements ?? {})) {
     const available = required.every((name) => actual.has(name) && actual.get(name) === expected.get(name));
     if (!available) {
+      if (capability.startsWith('gesture:')) result.gestures[capability.slice(8) as Gesture] = 'unsupported';
+      else result[capability as Exclude<keyof AvatarCapabilities, 'gestures'>] = 'unsupported';
+    }
+  }
+  const availableAnimations = new Set(animations.filter(({ artboard }) => artboard === adapter.artboard).map(({ name }) => name));
+  for (const [capability, required] of Object.entries(adapter.animationCapabilityRequirements ?? {})) {
+    if (!required.every((name) => availableAnimations.has(name))) {
       if (capability.startsWith('gesture:')) result.gestures[capability.slice(8) as Gesture] = 'unsupported';
       else result[capability as Exclude<keyof AvatarCapabilities, 'gestures'>] = 'unsupported';
     }
