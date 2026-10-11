@@ -58,7 +58,7 @@ jobs:
       - name: Rust tests
         run: cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
       - name: Build executable and NSIS installer
-        run: pnpm --filter @amyu/desktop tauri build --ci --bundles nsis -- --locked
+        run: pnpm --filter @amyu/desktop native:build
       - name: Production process smoke check
         run: ./scripts/windows-smoke.ps1 -Executable ./work/native-target/release/amyu-desktop.exe -Report ./work/native-smoke.json
       - name: Prepare artifact checksums

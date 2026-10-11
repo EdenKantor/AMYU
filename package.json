@@ -12,7 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "build": "pnpm --filter @amyu/avatar-lab build && pnpm --filter @amyu/desktop build",
-    "build:desktop": "pnpm --filter @amyu/desktop tauri build",
+    "build:desktop": "pnpm --filter @amyu/desktop native:build",
     "dev:desktop:local": "powershell -NoProfile -File apps/desktop/native.ps1 dev",
     "build:desktop:local": "powershell -NoProfile -File apps/desktop/native.ps1 build",
     "character:build": "node scripts/build-character.mjs",

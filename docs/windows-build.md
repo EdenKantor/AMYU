@@ -26,6 +26,8 @@ The optional PowerShell wrapper accepts `dev`, `build`, `check`, `test` and `fmt
 & ./apps/desktop/native.ps1 check
 & ./apps/desktop/native.ps1 dev
 & ./apps/desktop/native.ps1 build
+# Reuse an existing contained toolchain (contains cargo/ and rustup/):
+& ./apps/desktop/native.ps1 check -RustRoot 'C:\path\to\existing\rust'
 ```
 
 It uses the repository's optional ignored `work/rust` toolchain when available, otherwise the Rust toolchain already present in the process environment/PATH. It installs nothing and restores any process environment changes on exit. The source checkout does not include Rust. Run scripts only where permitted by the host policy; the direct package-manager and Cargo commands above are also available.
@@ -36,7 +38,7 @@ Default Cargo outputs are under `apps/desktop/src-tauri/target/release/`: the ap
 
 The [Windows Build workflow](https://github.com/EdenKantor/AMYU/actions/workflows/windows-build.yml), defined in [`.github/workflows/windows-build.yml`](../.github/workflows/windows-build.yml), builds on a GitHub-hosted Windows runner. It supports manual **Run workflow** and relevant pushes to `main`. It uses Node 24, pinned pnpm and Rust stable with the committed lockfiles.
 
-The workflow validates frontend code, checks Rust formatting, runs Rust tests and builds the Tauri Windows package. It uploads the native EXE and NSIS installer as workflow artifacts. It does **not** create or publish a GitHub release. Exact run status, artifact links and any process smoke-test observations belong in the [build report](build-report.md).
+The workflow validates frontend code, checks Rust formatting, runs Rust tests and builds the Tauri Windows package. The `AMYU-Windows-x64-<commit>` artifact contains `AMYU.exe`, the NSIS installer, SHA-256 checksums, asset attribution, build metadata and a process-smoke report. It is retained for 30 days. It does **not** create or publish a GitHub release. Exact run status, artifact links and any process smoke-test observations belong in the [build report](build-report.md).
 
 To retrieve a build, open the workflow, select a successful run for the intended commit and download its Windows artifact. Extract the archive before launching the executable or installer. A hosted runner build is independent of this development machine's Application Control policy; a downloaded unsigned artifact can still be restricted by the destination host's policy. Do not disable security controls to run it.
 

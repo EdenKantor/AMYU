@@ -38,7 +38,7 @@ try {
 
     switch ($Command) {
         'dev' { & pnpm --filter '@amyu/desktop' tauri dev }
-        'build' { & pnpm --filter '@amyu/desktop' tauri build --bundles nsis -- --locked }
+        'build' { & pnpm --filter '@amyu/desktop' native:build }
         'check' { & cargo check --locked --manifest-path 'apps/desktop/src-tauri/Cargo.toml' }
         'test' { & cargo test --locked --manifest-path 'apps/desktop/src-tauri/Cargo.toml' }
         'fmt' { & cargo fmt --check --manifest-path 'apps/desktop/src-tauri/Cargo.toml' }

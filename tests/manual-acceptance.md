@@ -29,10 +29,10 @@ Record current build and launch evidence in [native validation](../docs/native-v
 
 ### Frontend preview checklist
 
-- [ ] Confirm the port 1420 pet preview explicitly identifies itself as a browser preview.
-- [ ] Review the default, minimum and larger preview layouts, composer, menu, local mock flow, acting and sleeping.
+- [x] Confirm the port 1420 pet preview explicitly identifies itself as a browser preview.
+- [x] Review the default, minimum and larger preview layouts, composer, menu, local mock flow, acting and sleeping. Browser review: 2026-10-11, default 360×460, minimum 300×360, larger 480×620; source demo controls no longer leak after clipping fix; Hebrew input accepted.
 - [ ] Confirm the `?mode=lab` route and independent port 5173 Avatar Lab remain available.
-- [ ] Record screenshots and observed state/interaction outcomes without claiming native drag, persistence, transparency or always-on-top acceptance.
+- [x] Record screenshots and observed state/interaction outcomes without claiming native drag, persistence, transparency or always-on-top acceptance. See `docs/screenshots/pet-shell/browser-*.jpg`; `?mode=lab` was opened from the pet menu and inspected at 1200×900.
 
 ## Avatar review record — Friendly Floating Bot, unapproved as final artwork
 

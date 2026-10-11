@@ -47,6 +47,17 @@ Rust owns the pet window and geometry persistence. Position is stored in physica
 
 Native permissions are limited to the pet's required window actions, fixed diagnostic metadata and opening Avatar Lab. The shell has no arbitrary executable capability. See [native validation](native-validation.md) for the actual build/launch record and persistence implementation details.
 
+Geometry is stored in `%LOCALAPPDATA%\dev.amyu.pet\pet-window.json`. Writes are debounced by 300 ms with a flush on close; minimized sentinel coordinates are ignored. A schema version, finite positive dimensions and file-size bound protect restoration. A temporary file is written before replacing the previous save. This is app window state only, not conversation memory.
+
+## Browser preview evidence
+
+The 2026-10-11 preview review confirmed startup, corrected Rive clipping, Hebrew input, listening/thinking/speaking/idle progression, local reply, acting and sleep controls, menu bounds at 300 × 360, a 480 × 620 layout and the separate developer route. These images show the browser preview, not a Windows desktop acceptance pass.
+
+| Pet and composer | Resized preview and separate lab |
+| --- | --- |
+| ![Pet browser preview](screenshots/pet-shell/browser-pet.jpg) | ![Larger pet browser preview](screenshots/pet-shell/browser-resized.jpg) |
+| ![Hebrew composer browser preview](screenshots/pet-shell/browser-composer.jpg) | ![Separate Avatar Lab browser route](screenshots/pet-shell/browser-avatar-lab.jpg) |
+
 ## Known limitations and acceptance
 
 - The robot remains attributed third-party prototype art. Listening resembles a greeting; thinking and acting share a prop; speech has a small coupled mouth/arm route; sleeping freezes the body. Idle uses authored float/blink motion, not newly independent breath or eyelid controls.

@@ -8,6 +8,7 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "tauri": "tauri",
+    "native:build": "tauri build --ci --bundles nsis -- --locked",
     "native:check": "cargo check --locked --manifest-path src-tauri/Cargo.toml",
     "native:test": "cargo test --locked --manifest-path src-tauri/Cargo.toml"
   },
