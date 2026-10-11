@@ -13,8 +13,8 @@
     "test:watch": "vitest",
     "build": "pnpm --filter @amyu/avatar-lab build && pnpm --filter @amyu/desktop build",
     "build:desktop": "pnpm --filter @amyu/desktop tauri build",
-    "dev:desktop:local": "powershell -NoProfile -ExecutionPolicy Bypass -File apps/desktop/native.ps1 dev",
-    "build:desktop:local": "powershell -NoProfile -ExecutionPolicy Bypass -File apps/desktop/native.ps1 build",
+    "dev:desktop:local": "powershell -NoProfile -File apps/desktop/native.ps1 dev",
+    "build:desktop:local": "powershell -NoProfile -File apps/desktop/native.ps1 build",
     "character:build": "node scripts/build-character.mjs",
     "check": "pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },

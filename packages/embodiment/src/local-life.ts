@@ -4,6 +4,7 @@ import { approach, SeededRandom, smoothstep } from './math';
 export interface LocalLifeFrame {
   blink: number;
   breathing: number;
+  eyeVariation: number;
   headX: number;
   headY: number;
   tilt: number;
@@ -12,11 +13,20 @@ export interface LocalLifeFrame {
   gaze: GazeTarget;
 }
 
+/** Fast close, a short closed hold, and a slower, soft reopening. */
+export function blinkCurve(progress: number): number {
+  if (!Number.isFinite(progress) || progress <= 0 || progress >= 1) return 0;
+  if (progress < 0.28) return smoothstep(progress / 0.28);
+  if (progress < 0.38) return 1;
+  return smoothstep((1 - progress) / 0.62);
+}
+
 /** Calm autonomous behavior. Timers are advanced exclusively by the director clock. */
 export class LocalLifeEngine {
   private readonly random: SeededRandom;
   private readonly phase: number;
-  private readonly breathPeriod: number;
+  private breathPeriod: number;
+  private breathPhase: number;
   private timeMs = 0;
   private nextBlinkMs: number;
   private blinkStartMs = Number.NEGATIVE_INFINITY;
@@ -32,6 +42,7 @@ export class LocalLifeEngine {
   constructor(seed = 42) {
     this.random = new SeededRandom(seed);
     this.phase = this.random.between(0, Math.PI * 2);
+    this.breathPhase = this.phase;
     this.breathPeriod = this.random.between(3800, 4800);
     this.nextBlinkMs = this.random.between(1400, 4400);
     this.nextSaccadeMs = this.random.between(1100, 3000);
@@ -44,13 +55,13 @@ export class LocalLifeEngine {
 
     if (this.timeMs >= this.nextBlinkMs) {
       this.blinkStartMs = this.timeMs;
-      this.blinkDurationMs = this.random.between(140, 210);
+      this.blinkDurationMs = this.random.between(210, 290);
       if (this.doubleBlink) {
         this.doubleBlink = false;
-        this.nextBlinkMs = this.timeMs + this.random.between(2300, 5900);
+        this.nextBlinkMs = this.timeMs + this.random.between(2400, 6200);
       } else {
         this.doubleBlink = this.random.next() < 0.12;
-        this.nextBlinkMs = this.timeMs + (this.doubleBlink ? this.random.between(280, 420) : this.random.between(2300, 5900));
+        this.nextBlinkMs = this.timeMs + (this.doubleBlink ? this.blinkDurationMs + this.random.between(90, 170) : this.random.between(2400, 6200));
       }
     }
 
@@ -70,14 +81,19 @@ export class LocalLifeEngine {
     this.posture.y = approach(this.posture.y, this.postureTarget.y, deltaMs, 1600);
 
     const blinkProgress = (this.timeMs - this.blinkStartMs) / this.blinkDurationMs;
-    const closing = blinkProgress / 0.42;
-    const opening = (1 - blinkProgress) / 0.58;
-    const blink = blinkProgress >= 0 && blinkProgress <= 1 ? smoothstep(Math.min(closing, opening)) : 0;
+    const blink = blinkCurve(blinkProgress);
+    this.breathPhase += deltaMs / this.breathPeriod * Math.PI * 2;
+    if (this.breathPhase >= Math.PI * 2) {
+      this.breathPhase %= Math.PI * 2;
+      // Change timing at a cycle boundary; the phase itself never jumps.
+      this.breathPeriod = this.random.between(3800, 5200);
+    }
     const t = this.timeMs / 1000;
 
     return {
       blink,
-      breathing: (Math.sin((this.timeMs / this.breathPeriod) * Math.PI * 2 + this.phase) + 1) / 2,
+      breathing: (Math.sin(this.breathPhase) + 1) / 2,
+      eyeVariation: Math.sin(t * 0.43 + this.phase) * 0.009 + Math.sin(t * 0.91) * 0.004,
       headX: Math.sin(t * 0.71 + this.phase) * 0.025 + Math.sin(t * 1.13) * 0.012,
       headY: Math.sin(t * 0.53 + this.phase) * 0.025,
       tilt: Math.sin(t * 0.31 + this.phase) * 0.025,

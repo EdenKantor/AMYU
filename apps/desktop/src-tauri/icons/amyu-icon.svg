@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Original AMYU application mark; independent of the prototype character. -->
+  <rect x="24" y="24" width="464" height="464" rx="144" fill="#34483e"/>
+  <path d="M139 343 217 162c15-34 63-34 78 0l78 181" fill="none" stroke="#f5f0de" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M177 283h158" fill="none" stroke="#c4df94" stroke-width="40" stroke-linecap="round"/>
+  <circle cx="224" cy="239" r="13" fill="#34483e"/>
+  <circle cx="288" cy="239" r="13" fill="#34483e"/>
+</svg>

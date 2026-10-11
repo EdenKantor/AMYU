@@ -89,6 +89,8 @@ export interface AvatarFrame {
   emotionIntensity: number;
   presence: PresenceState;
   awake: boolean;
+  /** Suppress continuous authored movement when the user requests less motion. */
+  reducedMotion?: boolean;
   stateWeights: Record<ConversationState, number>;
   emotionWeights: Record<Emotion, number>;
   gaze: GazeTarget;

@@ -93,7 +93,7 @@ describe('actual third-party Expressive Floating rig', () => {
           wave.mix = 1; wave.progress = waveProgress;
         }
         mixer.apply(diagnostics, 1 / 60, 'baseline');
-        machine.advanceAndApply(1 / 60);
+        if (expressiveFloatingRig.stateMachinePlayback === 'native') machine.advanceAndApply(1 / 60);
         mixer.resetToRest();
         mixer.apply(diagnostics, 0, 'baseline');
         mixer.apply(diagnostics, 1 / 60, 'overlay');
@@ -148,8 +148,14 @@ describe('actual third-party Expressive Floating rig', () => {
     const clean = geometry(target, undefined, [frame()]);
     const thinking = frame({ state: 'thinking', stateWeights: { ...frame().stateWeights, idle: 0, thinking: 1 } });
     const wave = frame({ gesture: { name: 'wave', progress: 0.5, intensity: 1 } });
-    expect(geometry(target, undefined, [thinking])).toEqual(clean);
-    expect(geometry(target, undefined, [wave])).toEqual(clean);
+    for (const previous of [thinking, wave]) {
+      const actual = geometry(target, undefined, [previous]);
+      const cleanNumbers = clean.flat(2).filter((value): value is number => typeof value === 'number');
+      const actualNumbers = actual.flat(2).filter((value): value is number => typeof value === 'number');
+      expect(actualNumbers).toHaveLength(cleanNumbers.length);
+      // Fractional eyelid interpolation accumulates subpixel float rounding.
+      expect(Math.max(...actualNumbers.map((value, index) => Math.abs(value - cleanNumbers[index])))).toBeLessThan(0.001);
+    }
   });
 
   it('keeps authored speech moving beyond multiple full work-range durations', () => {
@@ -166,10 +172,8 @@ describe('actual third-party Expressive Floating rig', () => {
     const afterNumbers = after.flat(2).filter((value): value is number => typeof value === 'number');
     const cleanNumbers = clean.flat(2).filter((value): value is number => typeof value === 'number');
     expect(afterNumbers).toHaveLength(cleanNumbers.length);
-    // Native SM idle clocks differ after a state transition; allow its small
-    // authored breathing variation, but reject a latched arm/head pose.
     const maximumDifference = Math.max(...afterNumbers.map((value, index) => Math.abs(value - cleanNumbers[index])));
-    expect(maximumDifference).toBeLessThan(25);
+    expect(maximumDifference).toBeLessThan(0.0001);
   });
 
   it('frames the actual wave vectors and shadow with safe uniform crop bounds', () => {
@@ -192,5 +196,19 @@ describe('actual third-party Expressive Floating rig', () => {
     const available = info.animations.filter(({ name }) => name !== 'Waving');
     expect(diagnoseAnimationMappings(expressiveFloatingRig, available, frame()).find(({ animation }) => animation === 'Waving')?.status).toBe('UNMAPPED');
     expect(verifiedCapabilities(expressiveFloatingRig, info.stateMachines[0].inputs, available).gestures.wave).toBe('unsupported');
+  });
+
+  it('preserves the full authored mouth phase through silent gain and speed changes', () => {
+    const board = file.artboardByName('Artboard');
+    const mixer = new RiveAnimationMixer(runtime, board, expressiveFloatingRig);
+    const sample = (mix: number, speed: number) => [{ control: 'mouth', animation: 'Mouth-talk', status: 'MAPPED' as const, mix, speed }];
+    try {
+      mixer.apply(sample(1, 1), 0.1, 'overlay');
+      expect(mixer.inspect(sample(1, 1))[0].progress).toBeCloseTo(0.2);
+      mixer.apply(sample(0, 1), 0.1, 'overlay');
+      expect(mixer.inspect(sample(0, 1))[0].progress).toBeCloseTo(0.4);
+      mixer.apply(sample(0.7, 0.5), 0.1, 'overlay');
+      expect(mixer.inspect(sample(0.7, 0.5))[0].progress).toBeCloseTo(0.5);
+    } finally { mixer.dispose(); board.delete(); }
   });
 });

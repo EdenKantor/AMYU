@@ -1,13 +1,16 @@
 param(
     [ValidateSet('dev', 'build', 'check', 'test', 'fmt')]
-    [string]$Command = 'dev'
+    [string]$Command = 'dev',
+    # Optional existing toolchain directory containing cargo/ and rustup/.
+    # This only selects a toolchain; it never changes host security policy.
+    [string]$RustRoot = $env:AMYU_RUST_ROOT
 )
 
 $ErrorActionPreference = 'Stop'
 $repoPath = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..'))
 # Optional repository-local toolchain; work/ is ignored by Git.
 # The source repository does not include Rust and falls back to global Rust.
-$portableRustPath = [IO.Path]::GetFullPath((Join-Path $repoPath 'work\rust'))
+$portableRustPath = if ($RustRoot) { [IO.Path]::GetFullPath($RustRoot) } else { [IO.Path]::GetFullPath((Join-Path $repoPath 'work\rust')) }
 $portableCargoPath = Join-Path $portableRustPath 'cargo'
 $portableRustupPath = Join-Path $portableRustPath 'rustup'
 $savedEnvironment = @{}
@@ -22,8 +25,11 @@ try {
         (Test-Path -LiteralPath $portableRustupPath)) {
         $env:CARGO_HOME = $portableCargoPath
         $env:RUSTUP_HOME = $portableRustupPath
-        $env:CARGO_TARGET_DIR = Join-Path $portableRustPath 'target'
+        if (!$env:CARGO_TARGET_DIR) { $env:CARGO_TARGET_DIR = Join-Path $repoPath 'work\native-target' }
         $env:PATH = (Join-Path $portableCargoPath 'bin') + [IO.Path]::PathSeparator + $env:PATH
+    }
+    elseif ($RustRoot) {
+        throw "The supplied RustRoot must contain cargo\bin\cargo.exe and rustup\ directories: $portableRustPath"
     }
     elseif (!(Get-Command cargo -ErrorAction SilentlyContinue) -or
             !(Get-Command rustc -ErrorAction SilentlyContinue)) {
@@ -32,7 +38,7 @@ try {
 
     switch ($Command) {
         'dev' { & pnpm --filter '@amyu/desktop' tauri dev }
-        'build' { & pnpm --filter '@amyu/desktop' tauri build }
+        'build' { & pnpm --filter '@amyu/desktop' tauri build --bundles nsis -- --locked }
         'check' { & cargo check --locked --manifest-path 'apps/desktop/src-tauri/Cargo.toml' }
         'test' { & cargo test --locked --manifest-path 'apps/desktop/src-tauri/Cargo.toml' }
         'fmt' { & cargo fmt --check --manifest-path 'apps/desktop/src-tauri/Cargo.toml' }

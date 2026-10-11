@@ -1,0 +1,2302 @@
+{
+  "reviewDate": "2026-10-06",
+  "assetSha256": "03cf8342c66171d7d5b09a00f363118d16528d372080cbb2d4b21f7d5147dc54",
+  "method": "Original downloaded binary; installed Rive Canvas advanced WASM. Native typed input state changes and Canvas2D vector draw geometry recorded. Product appearance is reviewed separately in browser.",
+  "limitations": [
+    "Canvas2D harness reports no WebGL support; image meshes cannot be verified by this harness.",
+    "Work-area clip phases and full absolute timeline frames were sampled on fresh artboards. Geometry signatures do not establish product quality.",
+    "Frame draw indices are local drawing order, not stable source component IDs."
+  ],
+  "mainArtboard": "tyepx ai bot",
+  "stateMachine": "Theme_SM",
+  "animationTimings": [
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "typex logo ai",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "tracking off",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "tracking on",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "talking loop",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "welcome loop",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Receive loop",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": " Receive",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 0,
+      "speed": 0.5
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Idle",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 1,
+      "workEndFrames": 29,
+      "startSeconds": 0.041666666666666664,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    }
+  ],
+  "clipSamples": [
+    {
+      "name": "Theme_Dark",
+      "distinctSignatures": 1,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "47c6353e0f22e9fc766f222b7394376e423e84b965fcf67b93470f46b989f5df",
+          "bounds": {
+            "minX": 97.27468449267474,
+            "minY": 149.90376220035432,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Theme Light",
+      "distinctSignatures": 1,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "4c7d26537267d1b406f8f98df69c924cfd53e60e346898439d511a29b744c85b",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "typex logo ai",
+      "distinctSignatures": 1,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "tracking off",
+      "distinctSignatures": 1,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "85ab6a26b0095ab1eb5a0d5af9524bc03ded9fab668c0013b693a93140cccacd",
+          "bounds": {
+            "minX": 82.8391289522883,
+            "minY": 153.82823765520743,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "tracking on",
+      "distinctSignatures": 1,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "0dec22886e723fe5c82850a25aaa765fb239acbe8d0d40c5d776ecf1d02c3fc7",
+          "bounds": {
+            "minX": 82.83153007533518,
+            "minY": 153.749761703059,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "talking loop",
+      "distinctSignatures": 7,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "e43a7e647ed38903c9b979c7d8d7a8b0c245af66693122bc3c0ca78374b77063",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "4846be1b7a543cde84505a83259be9146eceea5497a6a92dc20e3654f8a0e556",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.38423853309817,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "029404aa640d4d14cbdcefeb49f4c5d96d596bab805a70018929f904f2af58dc",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 157.9007869643999,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "d43b11555c61b9b5c7841ae9fc3f99688aab52797bc7a8ea342bdccf1dfc6f6e",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 158.82575298861536,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "973e90dfccee74e3aa41d11c1a1c17ec7723ae5bf4f54873f496475194b2a5f0",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.44878072366703,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "3a84d137af462c6f1a0e5c9e5b76c52167c0974cab03d2c29086802cee9f3d38",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "c7855f7475c87c17829d0ef29642dc37a5dfb6fe3b7853a3a086c6eca705bcde",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "welcome loop",
+      "distinctSignatures": 7,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "9a8af2078755389c0a305bcff622cf48babc4150368aeadb2bbc9f8918ac6e37",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "d15dd7c85a0201f306cd57ae8eb1e90d4cb23047d3c58ae228096470e0a7a2fa",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.38423853309817,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "c4956c819f84a4513c34e4d8f067bd25889c8c3dc90e38e208cf3a4fe1c269aa",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 157.9007869643999,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "8fa4526adcc4bd912cc3039bc83065a377792eaf70e4c49b5a87d92f615d4643",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 158.82575298861536,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "9961fa537caa440ec80b9ecc3dff3168697f2175670dbab86ee31b1ebc9b7839",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.44878072366703,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "5b088a902c31773cea3d8b4eb34ff3baa1a5ccd2b2da561468061bfc5b2c910d",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "186495573fdeba8a44bee66368c54793ab7cbbc4ef67d715c6028697ec7d3fce",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Receive loop",
+      "distinctSignatures": 7,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "e01a313e01e51767edac89085c6f45f52876dbdf835707a0e05b5db21b6e22dd",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "e20b1ca63eed800c73c1308673e16b4c5faafa1f342b703951fbb803e1032f7d",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.38423853309817,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "45d7c95e8bbff012f696172f9f33701ff672f1a3b276b4a9873bde4139a1c48e",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 157.9007869643999,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "7240b5bbe775f75aec9ef2b13c9adaf87089cdf7c237b5cc10fe153818ebfb56",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 158.82575298861536,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "a3a354896f13ed669fc1da04a75576aeb6bd21b5c42d20c86844cabca9d00298",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.44878072366703,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "4a497fdfaa9b6f1380ae87b4b48ffaeb5252984a1498577ffa8616bd292be34c",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "8bcac5db34e5ab46b6bce311521c39d5dbd575ac8218e5983bf98be942c97cb0",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": " Receive",
+      "distinctSignatures": 7,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "b1b03f32f3d61f2c2a7f857aab112f52000346fb025b500b5bd01c7f8d9461f4",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "3d388446933ddf0c61c90fdd45d1d0cc878903cdb10014971e3b652752fd2b07",
+          "bounds": {
+            "minX": 98.33000373840332,
+            "minY": 163.38423853309817,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "4664918a838335099bd44dc2e176a67869807291a7f9a32bf977e65915e5cf26",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 157.9007869643999,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "1dd80fd3c27bb25b14e4d5c8c75266b897b7c535973345f6c77851e00bd9c58a",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 158.82575298861536,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "34862f54d66c9e7086fa1228f0d94d0a7e42a2a0d44641b46e1fc2666f4c90e5",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.44878072366703,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "78f96d823751360f93c1513cc57f763052e363daa0d60dbf1df22fa9c7222a98",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "3310a4fdb96e28b00901ce08f07839144dae61d40d29ffc5734643b0c3310e0d",
+          "bounds": {
+            "minX": 62.55620982360847,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Idle",
+      "distinctSignatures": 7,
+      "samples": [
+        {
+          "phase": 0,
+          "signature": "8c8b13c54267c0f72c1f8d17df9fb80dc1b6034dfd04f5f99b78013df9bcd1b2",
+          "bounds": {
+            "minX": 98.03000068664551,
+            "minY": 163.56111841591067,
+            "maxX": 342.7800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.1,
+          "signature": "badabe34a9ab1d269c49dbca5aa5bf63c09e5625e312350e338e7f7833595799",
+          "bounds": {
+            "minX": 97.95222663879395,
+            "minY": 162.71569322792345,
+            "maxX": 342.702241897583,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.25,
+          "signature": "a8b1bf263bef6490275b66bdb6104893eb207900b7f1ebf7fd40d371e13bab82",
+          "bounds": {
+            "minX": 97.83555793762207,
+            "minY": 158.17105927511642,
+            "maxX": 342.585542678833,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.5,
+          "signature": "6ca12609509a4514b4b6d8361936beeb699639c4a9de454f41646163ac11a1e4",
+          "bounds": {
+            "minX": 97.64111518859863,
+            "minY": 157.2387329967794,
+            "maxX": 342.39111518859863,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.75,
+          "signature": "ec91865c749857ad63ef591647ad09354f7ee437f703a549fd7a7bf137a044ba",
+          "bounds": {
+            "minX": 97.53000068664551,
+            "minY": 163.4586363470951,
+            "maxX": 342.2800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 0.9,
+          "signature": "a3b5c4b6256340a730342268c4e9d82fe72f47c6eb0cb659d68a7d8c2ec30d67",
+          "bounds": {
+            "minX": 97.53000068664551,
+            "minY": 163.56111841591067,
+            "maxX": 342.2800006866455,
+            "maxY": 410.5
+          }
+        },
+        {
+          "phase": 1,
+          "signature": "2cd54a74d5e443704ede78804bda5cec28f9700cfe4a5744cd49c9d76864de82",
+          "bounds": {
+            "minX": 97.53000068664551,
+            "minY": 163.56111841591067,
+            "maxX": 342.2800006866455,
+            "maxY": 410.5
+          }
+        }
+      ]
+    }
+  ],
+  "nativeButtons": [
+    {
+      "name": "left",
+      "coordinate": {
+        "x": 125,
+        "y": 400
+      },
+      "before": {
+        "frame": 60,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 0
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": false
+          }
+        ],
+        "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+        "changes": [
+          {
+            "frame": 0,
+            "state": "tracking on"
+          },
+          {
+            "frame": 0,
+            "state": "Idle"
+          },
+          {
+            "frame": 0,
+            "state": "Theme_Dark"
+          }
+        ]
+      },
+      "held": {
+        "frame": 90,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 1
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "c37a172c2653d70f595994953d29b10bbbe1c15ac87ab8c601535d795fc32f1d",
+        "changes": [
+          {
+            "frame": 60,
+            "state": "tracking off"
+          },
+          {
+            "frame": 60,
+            "state": "Idle"
+          }
+        ]
+      },
+      "released": {
+        "frame": 330,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 1
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "34e5bc726d476b54c57f9287d0f3492a76db63f4b55723c0e6fa406b0a1e4ff8",
+        "changes": []
+      }
+    },
+    {
+      "name": "middle-left",
+      "coordinate": {
+        "x": 188,
+        "y": 400
+      },
+      "before": {
+        "frame": 60,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 0
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": false
+          }
+        ],
+        "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+        "changes": [
+          {
+            "frame": 0,
+            "state": "tracking on"
+          },
+          {
+            "frame": 0,
+            "state": "Idle"
+          },
+          {
+            "frame": 0,
+            "state": "Theme_Dark"
+          }
+        ]
+      },
+      "held": {
+        "frame": 90,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 2
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "0fee4ebe127f1151e6e4c3643efd6f4f0c4f20f770dbafcb3276338ba6a3e018",
+        "changes": [
+          {
+            "frame": 60,
+            "state": "tracking off"
+          },
+          {
+            "frame": 60,
+            "state": " Receive"
+          }
+        ]
+      },
+      "released": {
+        "frame": 330,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 2
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "c1050f0553bbffdf228fef2e7f7e771af76ee72f0f4e16a0e293c0ea4cbfb22e",
+        "changes": [
+          {
+            "frame": 206,
+            "state": "Receive loop"
+          }
+        ]
+      }
+    },
+    {
+      "name": "middle-right",
+      "coordinate": {
+        "x": 252,
+        "y": 400
+      },
+      "before": {
+        "frame": 60,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 0
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": false
+          }
+        ],
+        "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+        "changes": [
+          {
+            "frame": 0,
+            "state": "tracking on"
+          },
+          {
+            "frame": 0,
+            "state": "Idle"
+          },
+          {
+            "frame": 0,
+            "state": "Theme_Dark"
+          }
+        ]
+      },
+      "held": {
+        "frame": 90,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 3
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "c4a65cc1d47cb6d77ea5c79a6870d678ac6cff99c0ed32f869d7d3344245859e",
+        "changes": [
+          {
+            "frame": 60,
+            "state": "tracking off"
+          },
+          {
+            "frame": 60,
+            "state": "welcome loop"
+          }
+        ]
+      },
+      "released": {
+        "frame": 330,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 3
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "f04c99b0313e25f047a78daa95e5733ebf80c28535ab6da6728e1a89d1d38663",
+        "changes": []
+      }
+    },
+    {
+      "name": "right",
+      "coordinate": {
+        "x": 316,
+        "y": 400
+      },
+      "before": {
+        "frame": 60,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 0
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": false
+          }
+        ],
+        "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+        "changes": [
+          {
+            "frame": 0,
+            "state": "tracking on"
+          },
+          {
+            "frame": 0,
+            "state": "Idle"
+          },
+          {
+            "frame": 0,
+            "state": "Theme_Dark"
+          }
+        ]
+      },
+      "held": {
+        "frame": 90,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 4
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "9727c1088a38778782e34b7b57e14730c4d05f389d251be7523e87386fab4aaa",
+        "changes": [
+          {
+            "frame": 60,
+            "state": "tracking off"
+          },
+          {
+            "frame": 60,
+            "state": "talking loop"
+          }
+        ]
+      },
+      "released": {
+        "frame": 330,
+        "values": [
+          {
+            "name": " Receive down",
+            "type": 58,
+            "value": null
+          },
+          {
+            "name": "Number 1",
+            "type": 56,
+            "value": 4
+          },
+          {
+            "name": "eceive",
+            "type": 59,
+            "value": false
+          },
+          {
+            "name": "istracking",
+            "type": 59,
+            "value": true
+          }
+        ],
+        "signature": "2ec8c514734710698a84c90efcc15ff92d00248a212913553db0a307febf657b",
+        "changes": []
+      }
+    }
+  ],
+  "nativeSequences": [
+    {
+      "name": "number sequence",
+      "records": [
+        {
+          "frame": 60,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+          "changes": [
+            {
+              "frame": 0,
+              "state": "tracking on"
+            },
+            {
+              "frame": 0,
+              "state": "Idle"
+            },
+            {
+              "frame": 0,
+              "state": "Theme_Dark"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 3
+          },
+          "frame": 240,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 3
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "a0dffc63224a82e7eb8fa38cfa3eb7625b708cc5a1e32fd9492faa0ad3f974c0",
+          "changes": [
+            {
+              "frame": 60,
+              "state": "welcome loop"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 1
+          },
+          "frame": 420,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 1
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "afa0e023d6fb7ca471fed04db3eb0e9434a5ac266754a41cd8b6cc8adefe4907",
+          "changes": [
+            {
+              "frame": 240,
+              "state": "Idle"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 4
+          },
+          "frame": 600,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 4
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "debb2695ecc542b0a9dcdd8e70ac693b9dae8677aaa55f729aa984d89a56beb8",
+          "changes": [
+            {
+              "frame": 420,
+              "state": "talking loop"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 1
+          },
+          "frame": 780,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 1
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "d3908ca8640cf6207279d5993fb40f979fb44ba29601864e46685fa9fb0a8ee8",
+          "changes": [
+            {
+              "frame": 600,
+              "state": "Idle"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 2
+          },
+          "frame": 960,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 2
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "3205ff310ead1c1de97b05907c860d4593b9b94af1c44772688773625add73c9",
+          "changes": []
+        },
+        {
+          "event": {
+            "number": 1
+          },
+          "frame": 1140,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 1
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "ae088e2d024784f0035d1612dd207e15474e8f6d271a9f99217b01d3f5861dae",
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "receive true false",
+      "records": [
+        {
+          "frame": 60,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+          "changes": [
+            {
+              "frame": 0,
+              "state": "tracking on"
+            },
+            {
+              "frame": 0,
+              "state": "Idle"
+            },
+            {
+              "frame": 0,
+              "state": "Theme_Dark"
+            }
+          ]
+        },
+        {
+          "event": {
+            "receive": true
+          },
+          "frame": 240,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": true
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "74d49f88952696d983f3267f08d566438c99100655de9f2388e86b98f215552c",
+          "changes": [
+            {
+              "frame": 60,
+              "state": "Receive loop"
+            }
+          ]
+        },
+        {
+          "event": {
+            "receive": false
+          },
+          "frame": 420,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "3cffda72deaf85b4976f5c263656c443bd452ba463ff193e9231f10cd258977c",
+          "changes": [
+            {
+              "frame": 240,
+              "state": " Receive"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 1
+          },
+          "frame": 600,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 1
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "806f105e9c0d995c1576412fdbf9cf52774241578092be19942a3e6746d1588a",
+          "changes": [
+            {
+              "frame": 420,
+              "state": "Idle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "receive trigger exit",
+      "records": [
+        {
+          "frame": 60,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+          "changes": [
+            {
+              "frame": 0,
+              "state": "tracking on"
+            },
+            {
+              "frame": 0,
+              "state": "Idle"
+            },
+            {
+              "frame": 0,
+              "state": "Theme_Dark"
+            }
+          ]
+        },
+        {
+          "event": {
+            "receive": true
+          },
+          "frame": 240,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": true
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "74d49f88952696d983f3267f08d566438c99100655de9f2388e86b98f215552c",
+          "changes": [
+            {
+              "frame": 60,
+              "state": "Receive loop"
+            }
+          ]
+        },
+        {
+          "event": {
+            "trigger": true
+          },
+          "frame": 420,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": true
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "bcac4efacaf04f2ca3730a888fff9860042f9e67f60018352a90f05835dc416b",
+          "changes": []
+        },
+        {
+          "event": {
+            "receive": false
+          },
+          "frame": 600,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "84c67729d7dae12d7ea9079007ee28c278f05c8419c0c8d9afd86b7319689151",
+          "changes": [
+            {
+              "frame": 420,
+              "state": " Receive"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 1
+          },
+          "frame": 780,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 1
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "806f105e9c0d995c1576412fdbf9cf52774241578092be19942a3e6746d1588a",
+          "changes": [
+            {
+              "frame": 600,
+              "state": "Idle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "trigger alone",
+      "records": [
+        {
+          "frame": 60,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+          "changes": [
+            {
+              "frame": 0,
+              "state": "tracking on"
+            },
+            {
+              "frame": 0,
+              "state": "Idle"
+            },
+            {
+              "frame": 0,
+              "state": "Theme_Dark"
+            }
+          ]
+        },
+        {
+          "event": {
+            "trigger": true
+          },
+          "frame": 240,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "fc2fa11f08ce367af0194211951bc98f548bbb1c223631f30200c9a9c9280a1d",
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "number two plus trigger",
+      "records": [
+        {
+          "frame": 60,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+          "changes": [
+            {
+              "frame": 0,
+              "state": "tracking on"
+            },
+            {
+              "frame": 0,
+              "state": "Idle"
+            },
+            {
+              "frame": 0,
+              "state": "Theme_Dark"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 2,
+            "trigger": true
+          },
+          "frame": 240,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 2
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "1e60973fb290c62876c57f47ad2c2d7707c0cf82584534d1fede319e10cb568e",
+          "changes": [
+            {
+              "frame": 60,
+              "state": " Receive"
+            },
+            {
+              "frame": 206,
+              "state": "Receive loop"
+            }
+          ]
+        },
+        {
+          "event": {
+            "number": 1
+          },
+          "frame": 420,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 1
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "43d85137a563ddf511e569608e33f77b4dcef08be996d5af76ed3a99124af226",
+          "changes": [
+            {
+              "frame": 240,
+              "state": "Idle"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "tracking toggle",
+      "records": [
+        {
+          "frame": 60,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "e802c6c2c242570786f9c06c0bde6a5e95a10515f2fbf616b61c235af8f4269d",
+          "changes": [
+            {
+              "frame": 0,
+              "state": "tracking on"
+            },
+            {
+              "frame": 0,
+              "state": "Idle"
+            },
+            {
+              "frame": 0,
+              "state": "Theme_Dark"
+            }
+          ]
+        },
+        {
+          "event": {
+            "tracking": true
+          },
+          "frame": 240,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": true
+            }
+          ],
+          "signature": "fc2fa11f08ce367af0194211951bc98f548bbb1c223631f30200c9a9c9280a1d",
+          "changes": [
+            {
+              "frame": 60,
+              "state": "tracking off"
+            }
+          ]
+        },
+        {
+          "event": {
+            "tracking": false
+          },
+          "frame": 420,
+          "values": [
+            {
+              "name": " Receive down",
+              "type": 58,
+              "value": null
+            },
+            {
+              "name": "Number 1",
+              "type": 56,
+              "value": 0
+            },
+            {
+              "name": "eceive",
+              "type": 59,
+              "value": false
+            },
+            {
+              "name": "istracking",
+              "type": 59,
+              "value": false
+            }
+          ],
+          "signature": "b08f150cdda999bd0be5a200f7fa9750cc03e93826737c24705d79e34cea6066",
+          "changes": [
+            {
+              "frame": 240,
+              "state": "tracking on"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "robotBoundsSampled": {
+    "minX": 62.55620982360847,
+    "minY": 155.42394967710717,
+    "maxX": 307.1330293022029,
+    "maxY": 384.13781365472096,
+    "method": "Every integer frame0..72 at24fps for all five body clips; Theme Light applied first; excludes native button-row drawings whose minY is389 or more."
+  },
+  "presentationCrop": {
+    "x": 50,
+    "y": 145,
+    "width": 270,
+    "height": 241
+  },
+  "closedEyeFrames": {
+    "absoluteSeconds": 0.125,
+    "absoluteFrame": 3,
+    "fps": 24,
+    "idleWorkAreaProgress": 0.07142857142857142,
+    "alternateFrame": 20,
+    "leftPillHeight": 0.9508550663908579,
+    "rightPillHeight": 0.948774786691331,
+    "openPillHeight": 15.847585339503013,
+    "limitation": "The closed pose is embedded in each full-body timeline. Holding its phase also holds body and float; it is not an independently bound eye property."
+  },
+  "headAudit": {
+    "comparedFrames": [
+      0,
+      3,
+      10,
+      20,
+      29
+    ],
+    "idleVersusReceiveLoop": "Identical bounded head-region vector signatures at all five sampled frames",
+    "independentNodeControl": "Only root artboard name resolved through node/bone/rootBone/transformComponent among all ASCII names found in original binary."
+  },
+  "speakingTrace": {
+    "widthRange": [
+      3.38999342918396,
+      11.255415916442871
+    ],
+    "heightRange": [
+      0.11371041262509607,
+      1.3270817112259579
+    ],
+    "description": "Small white visor trace measured in talking loop. Visual legibility and usefulness as speaking are separate judgments."
+  },
+  "rawAuditScripts": [
+    "work/audit-friendly-floating-bot.mjs",
+    "work/audit-friendly-floating-bot-controls.mjs",
+    "work/probe-friendly-floating-bot-head.mjs",
+    "work/probe-friendly-floating-bot-nodes.mjs"
+  ]
+}

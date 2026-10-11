@@ -56,6 +56,15 @@ importers:
 
   apps/desktop:
     dependencies:
+      '@amyu/avatar-contract':
+        specifier: workspace:*
+        version: link:../../packages/avatar-contract
+      '@amyu/avatar-rive':
+        specifier: workspace:*
+        version: link:../../packages/avatar-rive
+      '@amyu/embodiment':
+        specifier: workspace:*
+        version: link:../../packages/embodiment
       '@amyu/shared-ui':
         specifier: workspace:*
         version: link:../../packages/shared-ui

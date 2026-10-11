@@ -1,5 +1,6 @@
 import { clamp, createAvatarCapabilities, type AvatarCapabilities, type AvatarFrame, type Gesture } from '@amyu/avatar-contract';
-import type { DiscoveredRiveInput, MappingDiagnostic, RiveAssetAttribution, RiveFraming, RiveInputType } from './inspection';
+import type { DiscoveredRiveInput, MappingDiagnostic, RiveAssetAttribution, RiveFraming, RiveInputType, RiveReviewSupport } from './inspection';
+import type { RiveViewModelBindingSpec } from './view-model';
 
 export interface NumericRiveInputSpec {
   name: string;
@@ -21,9 +22,10 @@ export interface RiveAnimationSpec {
   stage?: 'baseline' | 'overlay';
   playbackRange?: readonly [number, number];
   speed?: number;
+  keepPhaseWhenInactive?: boolean;
   resetAtRest?: number;
 }
-export interface RiveAnimationValue { mix: number; progress?: number }
+export interface RiveAnimationValue { mix: number; progress?: number; speed?: number }
 export type RiveAnimationValues = Record<string, RiveAnimationValue>;
 
 /** Only this adapter knows names inside the replaceable character artwork. */
@@ -31,6 +33,11 @@ export interface RiveRigAdapter {
   id: string;
   attribution?: RiveAssetAttribution;
   framing?: RiveFraming;
+  reviewSupport?: RiveReviewSupport;
+  stateMachinePlayback?: 'native' | 'authored-only';
+  viewModel?: RiveViewModelBindingSpec;
+  nativePointerEvents?: boolean;
+  previewBaseline?: readonly { name: string; progress: number; mix?: number }[];
   artboard: string;
   stateMachine: string;
   inputs: readonly RiveInputSpec[];

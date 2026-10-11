@@ -8,10 +8,13 @@
     "build": "vite build",
     "typecheck": "tsc --noEmit",
     "tauri": "tauri",
-    "native:check": "cargo check --manifest-path src-tauri/Cargo.toml",
-    "native:test": "cargo test --manifest-path src-tauri/Cargo.toml"
+    "native:check": "cargo check --locked --manifest-path src-tauri/Cargo.toml",
+    "native:test": "cargo test --locked --manifest-path src-tauri/Cargo.toml"
   },
   "dependencies": {
+    "@amyu/avatar-contract": "workspace:*",
+    "@amyu/avatar-rive": "workspace:*",
+    "@amyu/embodiment": "workspace:*",
     "@amyu/shared-ui": "workspace:*",
     "@tauri-apps/api": "2.8.0",
     "react": "19.2.0",

@@ -1,0 +1,474 @@
+{
+  "asset": "assets/character/third-party/interactive-character.riv",
+  "sourceUrl": "https://rive.app/marketplace/28370-53642-interactive-character-rig-bones-joysticks-and-data-binding/",
+  "downloadUrl": "https://public.rive.app/community/runtime-files/28370-53642-interactive-character-rig-bones-joysticks-and-data-binding.riv",
+  "creator": "aln.omrv",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "byteLength": 12722,
+  "sha256": "82b2160f32b7226f60db9d812cc8d33162382cd80c80ac3088b530acf3d58335",
+  "runtime": "@rive-app/canvas-advanced 2.44.0",
+  "generatedAt": "2026-10-04T18:15:21.517Z",
+  "modifications": "No binary/artwork changes; descriptive local filename only",
+  "artboards": [
+    "Carrot main"
+  ],
+  "stateMachines": [
+    {
+      "artboard": "Carrot main",
+      "name": "State Machine 1",
+      "inputs": []
+    }
+  ],
+  "animations": [
+    {
+      "artboard": "Carrot main",
+      "name": "active",
+      "timing": {
+        "frames": 600,
+        "fps": 60,
+        "durationSeconds": 10,
+        "workAreaEnabled": true,
+        "rawWorkStart": 60,
+        "rawWorkEnd": 276,
+        "workStartSeconds": 1,
+        "workEndSeconds": 4.6,
+        "effectiveSeconds": 3.5999999999999996,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "idle",
+      "timing": {
+        "frames": 600,
+        "fps": 60,
+        "durationSeconds": 10,
+        "workAreaEnabled": true,
+        "rawWorkStart": 240,
+        "rawWorkEnd": 360,
+        "workStartSeconds": 4,
+        "workEndSeconds": 6,
+        "effectiveSeconds": 2,
+        "loopValue": 1,
+        "loop": "loop",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "blink",
+      "timing": {
+        "frames": 240,
+        "fps": 60,
+        "durationSeconds": 4,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 4,
+        "effectiveSeconds": 4,
+        "loopValue": 1,
+        "loop": "loop",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Timeline 1",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Source",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Eyebrow X",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Blink",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Bottom eye",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "head X",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "head Y",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "pupil X",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "pupil Y",
+      "timing": {
+        "frames": 60,
+        "fps": 60,
+        "durationSeconds": 1,
+        "workAreaEnabled": false,
+        "rawWorkStart": 4294967295,
+        "rawWorkEnd": 4294967295,
+        "workStartSeconds": 0,
+        "workEndSeconds": 1,
+        "effectiveSeconds": 1,
+        "loopValue": 0,
+        "loop": "one-shot",
+        "speed": 1
+      }
+    }
+  ],
+  "animationTimings": [
+    {
+      "artboard": "Carrot main",
+      "name": "active",
+      "fps": 60,
+      "durationFrames": 600,
+      "durationSeconds": 10,
+      "workAreaEnabled": true,
+      "workStartFrames": 60,
+      "workEndFrames": 276,
+      "startSeconds": 1,
+      "endSeconds": 4.6,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "idle",
+      "fps": 60,
+      "durationFrames": 600,
+      "durationSeconds": 10,
+      "workAreaEnabled": true,
+      "workStartFrames": 240,
+      "workEndFrames": 360,
+      "startSeconds": 4,
+      "endSeconds": 6,
+      "loopValue": 1,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "blink",
+      "fps": 60,
+      "durationFrames": 240,
+      "durationSeconds": 4,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 4,
+      "loopValue": 1,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Timeline 1",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Source",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Eyebrow X",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Blink",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "Bottom eye",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "head X",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "head Y",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "pupil X",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Carrot main",
+      "name": "pupil Y",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    }
+  ],
+  "viewModels": [
+    {
+      "name": "ViewModel1",
+      "properties": [
+        {
+          "name": "triggerProperty",
+          "type": "trigger"
+        }
+      ],
+      "instances": [
+        "Instance"
+      ]
+    }
+  ],
+  "bindings": {
+    "status": "unknown",
+    "note": "Rive 2.44.0 exposes ViewModel properties but cannot enumerate which artwork properties are bound to them."
+  },
+  "availableStates": {
+    "status": "unknown",
+    "names": [],
+    "note": "Rive 2.44.0 does not expose a complete state/layer enumeration. Animation names are listed separately."
+  },
+  "artboardDetails": [
+    {
+      "name": "Carrot main",
+      "bounds": {
+        "minX": 0,
+        "minY": 0,
+        "maxX": 936,
+        "maxY": 916
+      }
+    }
+  ],
+  "viewModelDetails": [
+    {
+      "name": "ViewModel1",
+      "properties": [
+        {
+          "name": "triggerProperty",
+          "type": "trigger"
+        }
+      ],
+      "instances": [
+        {
+          "name": "Instance",
+          "viewModelName": "ViewModel1",
+          "properties": [
+            {
+              "name": "triggerProperty",
+              "type": "trigger",
+              "runtimeTriggerCallable": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "method": "Actual official binary decoded by the installed WASM. No API names inferred from marketplace claims.",
+  "bindingEffects": {
+    "status": "pending",
+    "note": "Actual trigger/property effects will be captured separately."
+  }
+}

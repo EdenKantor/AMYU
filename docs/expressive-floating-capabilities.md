@@ -2,6 +2,8 @@
 
 Date: **2026-10-03**. File: `assets/character/third-party/expressive-floating.riv`, 66,484 bytes; SHA-256 `cdef4cf409850321d28e31e5cd8c4e12ee27072f1da609e4b3c216e709cc3f62`. Inspection used the actual file with Rive 2.44.0. [Source/attribution](third-party-assets.md) and [inspection JSON](expressive-floating-inspection.json) are preserved.
 
+**Deep-refinement update — 2026-10-04:** the user rejected the current eyes, listening, speaking and mouth quality. The focused rendered pass reached **Candidate A practical ceiling NO**: listening remains nearly idle-like, full speech/mouth variation stays tiny/subtle, facial expressiveness and attention/gaze are poor or unavailable. Stop A beauty refinement. Playback support does not establish product acceptance; sustained context checks are recorded separately in [state design](avatar-state-design.md) and [product review](avatar-deep-review.md).
+
 ## Discovered structure
 
 | Item | Actual result |
@@ -22,21 +24,25 @@ The 18 discovered timeline names are `idle`, `Empty`, `Listening`, `Talking`, `W
 | Feature | File evidence | Visual support/acceptance |
 | --- | --- | --- |
 | Idle/floating | `idle` timeline; creator describes floating motion | Pending actual playback review |
-| Listening | `isListening` boolean and `Listening` timeline; actual clip changes only five mouth paths | Native cue has no head/eye/body change. AMYU adds a held Waving frame (30% progress / 80% mix), raising a hand near head/shoulder; root observed distinction from idle, human approval pending |
-| Thinking | `Thinking` timeline; no dedicated state-machine input | Root agent observed authored hand-to-chin pose; transitions verified; human visual approval pending |
-| Speaking/talking | `isTalking` boolean, `Talking` and `Mouth-talk` timelines | Root observed dynamic speaking in the 8s demo; authored body loop and energy-weighted mouth work-range playback, not a numeric mouth input; human approval pending |
-| Blink | Eye/blink timelines; creator describes natural blink | Pending actual playback review |
+| Listening | Actual Listening timeline changes only five mouth paths; isListening is discovered but not actively applied | First focused composition uses Talking at 22% progress / 0.42 gain, Listening contour and softer attentive eye phase; rejected held Waving removed; combined product review pending |
+| Thinking | Thinking timeline, no dedicated state-machine input | Actual solo hand-to-chin pose reviewed; first focused mapping varies progress 0.91–0.99; combined transitions/appearance pending |
+| Speaking/talking | Actual Talking body and full Mouth-talk work range; isTalking discovered but not actively applied | Solo mouth cycle line→slit→triangle→slit→line reviewed; persistent full-cycle phase plus energy mix/speed and restrained body now implemented; 12s combined demo quality pending |
+| Blink | Actual eye closure/reopening and autonomous blink observed in the earlier browser review | SUPPORTED playback; renewed naturalness/eye-shape/blend review pending, not a visual-quality PASS |
 | Continuous mouth amplitude | No numeric mouth control exposed | Unsupported by current adapter; unexposed internal control behavior remains UNKNOWN |
 | Gaze X/Y | No gaze input or ViewModel property exposed | Unsupported by current adapter; unexposed internal control behavior remains UNKNOWN |
 | Head follow | No head input or ViewModel property exposed | Unsupported by current adapter; unexposed internal control behavior remains UNKNOWN |
 | Happy/smile | `Mouth-smile` timeline; no emotion input | Pending review; no full emotion blend declared |
 | Concerned/surprised | No dedicated inspected input/timeline with these names | UNKNOWN; no invented emotion mapping |
-| Wave | `Waving` timeline; no gesture trigger | Pending visual/adapter review |
+| Wave | Actual `Waving` playback and neutral return observed in the earlier browser review; no native gesture trigger | SUPPORTED playback; renewed review from idle/listening/thinking/speaking and interruption pending, not a full product PASS |
 | Other six semantic gestures | No corresponding inspected trigger inputs | Unsupported by current adapter; no full gesture support declared |
 | Data Binding | No ViewModels reported | No exposed ViewModel-driven control; binding graph UNKNOWN |
 
-The implemented `expressiveFloatingRig` uses the two inspected booleans and named animation mappings for idle/Talking body playback, `Thinking`, `Waving`, `Mouth-normal`, `Mouth-smile`, `Mouth-talk`, `EYES-open` and `EYES-close`. `Mouth-talk` loops its existing 30–60% open work range at speed 0.3, with energy-weighted mix and a resting baseline at zero. The adapter's actual-vector draw-command tests verify resting mouth at zero and changed authored motion at energy 0.3, 0.7 and 1. Authored idle and Thinking/Talking/Waving start-pose restoration address earlier latched body properties. These are playback/composition, not a discovered numeric mouth parameter or human proof of acceptable visual quality. Blink and wave are supported after actual browser verification; the autonomous blink and authored wave return were observed; gaze, head follow, continuous mouth, full emotion blend, visemes and six other gestures are unsupported by the current adapter.
+The first focused `expressiveFloatingRig` runs in generic authored-only mode. The real booleans remain visible in inspection/mapping diagnostics with `applied:false`; native state-machine advancement is bypassed after actual Mouth-layer iteration warnings. All visible state behavior is authored timeline playback/composition, not active native flags.
 
-Exact composition, selection for review and screenshot status are recorded in the [correction report](avatar-correction-report.md). The held `Waving` frame is an AMYU-composed listening cue, separate from the native mouth-only Listening clip. Actual Candidate B evaluation found no mouth/talking animation or energy control, so it was not integrated. Candidate A is selected for human review; acceptance remains pending.
+Mouth-talk now loops the entire 0.5–1s work area with persistent phase, energy-weighted mix and speed 0.7 + 0.65×energy. Talking provides restrained body motion; listening holds a selected Talking body frame and the actual mouth contour. Bilateral EYES-open phase = semantic openness×0.72 replaces the previous full-open/close-endpoint overlay; zero is closed. Root reviewed all 18 timelines solo, including all eight eye variants and the complete mouth shape cycle. Unilateral wink/lower-left occlusion was rejected as the natural bilateral-blink route. Authored start-pose seeding and normal geometry establish a consistent rest baseline; full stress/pixel review remains necessary.
+
+These mappings are not a numeric mouth parameter or human approval. Blink and Wave remain supported playback; gaze, head follow, continuous mouth, full emotion blend, visemes and six other gestures remain unsupported. Per-emotion review support now declares neutral baseline supported, happy partial and the other eight unsupported; reused smile strength does not establish separate emotions.
+
+Historical composition and screenshots are recorded in the [correction report](avatar-correction-report.md). The user subsequently rejected the result. The held Waving listening frame was removed in the focused pass, but the alternative remained weak. Actual Candidate B evaluation found no mouth/talking animation or energy control, so it was not integrated. A stays the current prototype while actual Candidate C is compared; its practical ceiling is now **NO** and human acceptance is absent. See the [complete timeline audit](avatar-animation-audit.md) and [actual C evidence](interactive-character-capabilities.md).
 
 Visible quality remains a human gate. Numeric telemetry, existing architectural tests and timeline names cannot establish acceptable listening/thinking/speaking or mouth motion.

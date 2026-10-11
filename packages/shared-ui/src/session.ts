@@ -23,11 +23,13 @@ export class LabSession {
   private hovered = false;
   private lastAwakeState: Exclude<ConversationState, 'sleeping'> = 'idle';
   private timeline: DemoTimeline | null = null;
+  private demoPhaseIndex = -1;
+  private qaPose: Partial<Pick<AvatarFrame, 'eyeOpenness' | 'blink'>> = {};
   private pendingStateMetric?: () => number;
   private pendingAffectMetric?: () => number;
 
   constructor() { this.log('runtime.ready', 'Local life engine initialized'); }
-  get frame(): AvatarFrame { return { ...this.director.getSnapshot(), ...this.poseOverrides }; }
+  get frame(): AvatarFrame { return { ...this.director.getSnapshot(), ...this.qaPose, ...this.poseOverrides }; }
   get demo(): DemoStatus | null { return this.timeline?.snapshot() ?? null; }
   get touring(): boolean { return this.timeline?.kind === 'states'; }
   tick(deltaMs: number): AvatarFrame {
@@ -36,20 +38,21 @@ export class LabSession {
     this.elapsedMs += delta;
     if (this.timeline) {
       const sample = this.timeline.advance(delta);
-      if (sample.phase !== this.state) this.applyState(sample.phase);
-      this.applySpeechEnergy(sample.speechEnergy);
+      this.applyDemoSample(sample);
       if (sample.done) {
         this.timeline = null;
+        this.qaPose = {};
         this.log('demo.completed', sample.kind);
       }
     }
     const frame = this.director.tick(delta);
     this.pendingStateMetric?.(); this.pendingStateMetric = undefined;
     this.pendingAffectMetric?.(); this.pendingAffectMetric = undefined;
-    return { ...frame, ...this.poseOverrides };
+    return { ...frame, ...this.qaPose, ...this.poseOverrides };
   }
   setState(state: ConversationState): void {
     this.cancelDemo('manual state');
+    this.director.cancelGestures();
     this.applyState(state);
   }
   private applyState(state: ConversationState): void {
@@ -61,11 +64,11 @@ export class LabSession {
     this.log('conversation.state', state);
   }
   setAwake(awake: boolean): void {
+    const nextState = awake ? this.lastAwakeState : 'sleeping';
     this.cancelDemo('awake control');
-    if (!awake && this.state !== 'sleeping') this.lastAwakeState = this.state;
-    this.director.setAwake(awake);
-    this.state = awake ? this.lastAwakeState : 'sleeping';
-    this.speechEnergy = 0;
+    this.director.cancelGestures();
+    this.applyState(nextState);
+    this.applySpeechEnergy(0);
     this.log('embodiment.awake', String(awake));
   }
   setEmotion(emotion: Emotion): void {
@@ -87,6 +90,8 @@ export class LabSession {
     this.director.setSpeechEnergy(this.speechEnergy);
   }
   gesture(gesture: Gesture): void {
+    this.cancelDemo('manual gesture');
+    this.director.cancelGestures();
     this.director.triggerGesture(gesture);
     this.log('embodiment.gesture', gesture);
   }
@@ -120,9 +125,10 @@ export class LabSession {
     this.log('rig.override', `${field} = ${this.poseOverrides[field]?.toFixed(2)}`);
   }
   clearPoseOverrides(): void { this.poseOverrides = {}; this.log('rig.override.cleared', 'Local life controls restored'); }
-  click(): void {
+  click(supportedGestures: readonly Gesture[] = []): void {
+    this.cancelDemo('click');
     if (this.state === 'sleeping') this.setState('idle');
-    this.director.reactToClick(); this.log('pointer.click', 'Local contextual reaction');
+    this.director.reactToClick(supportedGestures); this.log('pointer.click', supportedGestures.length ? 'Local supported gesture reaction' : 'No verified gesture reaction for active asset');
   }
   setPaused(value: boolean): void { this.paused = value; this.log('runtime.motion', value ? 'paused' : 'resumed'); }
   setReducedMotion(value: boolean): void {
@@ -151,27 +157,44 @@ export class LabSession {
   }
   playSpeakingDemo(): void { this.startDemo('speaking'); }
   playStateDemo(): void { this.startDemo('states'); }
+  playEyeDemo(): void { this.startDemo('eyes'); }
+  playTransitionStressDemo(supportedGestures: readonly Gesture[] = []): void { this.startDemo('stress', supportedGestures); }
+  playGestureDemo(supportedGestures: readonly Gesture[]): void { this.startDemo('gestures', supportedGestures); }
   stopDemo(): void {
     this.cancelDemo('stop');
     this.applyState('idle');
     this.applySpeechEnergy(0);
   }
-  private startDemo(kind: DemoKind): void {
+  private startDemo(kind: DemoKind, supportedGestures: readonly Gesture[] = []): void {
     this.cancelDemo('restart');
     this.paused = false;
     this.poseOverrides = {};
     this.director.resetToIdle();
     this.director.setEmotion(this.emotion, this.intensity);
-    this.timeline = new DemoTimeline(kind);
+    this.timeline = new DemoTimeline(kind, supportedGestures);
+    this.demoPhaseIndex = -1;
     const first = this.timeline.snapshot();
-    this.applyState(first.phase);
-    this.applySpeechEnergy(0);
-    this.log('demo.started', kind === 'speaking' ? 'Speaking · 8s synthetic visual envelope · no audio' : 'Idle 2s · Listening 3s · Thinking 3s · Speaking 5s · Idle 2s');
+    this.applyDemoSample(first);
+    this.log('demo.started', `${kind} · ${(first.durationMs / 1000).toFixed(1)}s · local visual QA · no audio`);
+  }
+  private applyDemoSample(sample: DemoStatus): void {
+    if (sample.phaseIndex !== this.demoPhaseIndex) {
+      this.demoPhaseIndex = sample.phaseIndex;
+      this.director.cancelGestures();
+      if (sample.phase !== this.state || sample.phaseIndex === 0) this.applyState(sample.phase);
+      if (sample.gesture) this.director.triggerGesture(sample.gesture);
+      if (!sample.done) this.log('demo.phase', `${sample.label}${sample.repetition ? ` · ${sample.repetition}/10` : ''}`);
+    }
+    this.qaPose = sample.eyeOpenness === null ? {} : { eyeOpenness: sample.eyeOpenness, blink: sample.blink ?? 0 };
+    this.applySpeechEnergy(sample.speechEnergy);
   }
   private cancelDemo(reason: string): void {
     if (!this.timeline) return;
     const kind = this.timeline.kind;
     this.timeline = null;
+    this.qaPose = {};
+    this.demoPhaseIndex = -1;
+    this.director.cancelGestures();
     // Interrupt cached speech even while motion is paused, then preserve the selected state.
     // The caller may choose idle or another state after cancellation; affect is untouched.
     this.director.setConversationState('idle');

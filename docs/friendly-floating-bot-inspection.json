@@ -1,0 +1,1055 @@
+{
+  "name": "28071-53022-friendly-floating-bot",
+  "byteLength": 139255,
+  "sha256": "03cf8342c66171d7d5b09a00f363118d16528d372080cbb2d4b21f7d5147dc54",
+  "artboards": [
+    "tyepx ai bot",
+    " Welcome_btton ",
+    " Receive_btton ",
+    "star 3",
+    "talking line",
+    "Star 2",
+    "Idle_btton",
+    "cube 3d ",
+    "Star 1",
+    "Talking_btton"
+  ],
+  "stateMachines": [
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme_SM",
+      "inputs": [
+        {
+          "name": " Receive down",
+          "type": "trigger",
+          "typeId": 58
+        },
+        {
+          "name": "Number 1",
+          "type": "number",
+          "typeId": 56
+        },
+        {
+          "name": "eceive",
+          "type": "boolean",
+          "typeId": 59
+        },
+        {
+          "name": "istracking",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Button Animation",
+      "inputs": [
+        {
+          "name": "button-clicked",
+          "type": "trigger",
+          "typeId": 58
+        },
+        {
+          "name": "button-hover",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Button Animation",
+      "inputs": [
+        {
+          "name": "button-clicked",
+          "type": "trigger",
+          "typeId": 58
+        },
+        {
+          "name": "button-hover",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    },
+    {
+      "artboard": "star 3",
+      "name": "State Machine 1",
+      "inputs": [
+        {
+          "name": "isDark",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    },
+    {
+      "artboard": "talking line",
+      "name": "State Machine 1",
+      "inputs": []
+    },
+    {
+      "artboard": "Star 2",
+      "name": "State Machine 1",
+      "inputs": []
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Button Animation",
+      "inputs": [
+        {
+          "name": "button-clicked",
+          "type": "trigger",
+          "typeId": 58
+        },
+        {
+          "name": "button-hover",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "Theme_SM",
+      "inputs": [
+        {
+          "name": "isDark",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    },
+    {
+      "artboard": "Star 1",
+      "name": "State Machine 1",
+      "inputs": []
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Button Animation",
+      "inputs": [
+        {
+          "name": "button-clicked",
+          "type": "trigger",
+          "typeId": 58
+        },
+        {
+          "name": "button-hover",
+          "type": "boolean",
+          "typeId": 59
+        }
+      ]
+    }
+  ],
+  "animations": [
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme Light"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "typex logo ai"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "tracking off"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "tracking on"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "talking loop"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "welcome loop"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Receive loop"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": " Receive"
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Idle"
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Theme_Light"
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Not Hover"
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Over"
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Idle"
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "click"
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Theme_Light"
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Not Hover"
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Over"
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Idle"
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "click"
+    },
+    {
+      "artboard": "star 3",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "star 3",
+      "name": "Theme_Light"
+    },
+    {
+      "artboard": "star 3",
+      "name": "star 3"
+    },
+    {
+      "artboard": "talking line",
+      "name": "Theme_light"
+    },
+    {
+      "artboard": "talking line",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "talking line",
+      "name": "Timeline 1"
+    },
+    {
+      "artboard": "Star 2",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "Star 2",
+      "name": "Theme_light"
+    },
+    {
+      "artboard": "Star 2",
+      "name": "Star 2"
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Theme_Light"
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Not Hover"
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Over"
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Idle"
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "click"
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "Theme_Light"
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "cube 3d "
+    },
+    {
+      "artboard": "Star 1",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "Star 1",
+      "name": "Theme_light"
+    },
+    {
+      "artboard": "Star 1",
+      "name": "Star 1"
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Theme_Light"
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Theme_Dark"
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Not Hover"
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Over"
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Idle"
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "click"
+    }
+  ],
+  "animationTimings": [
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Theme Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "typex logo ai",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "tracking off",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "tracking on",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "talking loop",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "welcome loop",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Receive loop",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": " Receive",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 29,
+      "startSeconds": 0,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 0,
+      "speed": 0.5
+    },
+    {
+      "artboard": "tyepx ai bot",
+      "name": "Idle",
+      "fps": 24,
+      "durationFrames": 72,
+      "durationSeconds": 3,
+      "workAreaEnabled": true,
+      "workStartFrames": 1,
+      "workEndFrames": 29,
+      "startSeconds": 0.041666666666666664,
+      "endSeconds": 1.2083333333333333,
+      "loopValue": 1,
+      "speed": 0.20000000298023224
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Theme_Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Not Hover",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Over",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "Idle",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Welcome_btton ",
+      "name": "click",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Theme_Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Not Hover",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Over",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "Idle",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": " Receive_btton ",
+      "name": "click",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "star 3",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "star 3",
+      "name": "Theme_Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "star 3",
+      "name": "star 3",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": true,
+      "workStartFrames": 1,
+      "workEndFrames": 56,
+      "startSeconds": 0.016666666666666666,
+      "endSeconds": 0.9333333333333333,
+      "loopValue": 1,
+      "speed": 0.5
+    },
+    {
+      "artboard": "talking line",
+      "name": "Theme_light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "talking line",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "talking line",
+      "name": "Timeline 1",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": true,
+      "workStartFrames": 0,
+      "workEndFrames": 31,
+      "startSeconds": 0,
+      "endSeconds": 0.5166666666666667,
+      "loopValue": 1,
+      "speed": 0.6000000238418579
+    },
+    {
+      "artboard": "Star 2",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Star 2",
+      "name": "Theme_light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Star 2",
+      "name": "Star 2",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": true,
+      "workStartFrames": 8,
+      "workEndFrames": 51,
+      "startSeconds": 0.13333333333333333,
+      "endSeconds": 0.85,
+      "loopValue": 1,
+      "speed": 0.30000001192092896
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Theme_Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Not Hover",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Over",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "Idle",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Idle_btton",
+      "name": "click",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "Theme_Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "cube 3d ",
+      "name": "cube 3d ",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": true,
+      "workStartFrames": 9,
+      "workEndFrames": 33,
+      "startSeconds": 0.15,
+      "endSeconds": 0.55,
+      "loopValue": 1,
+      "speed": 0.4000000059604645
+    },
+    {
+      "artboard": "Star 1",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Star 1",
+      "name": "Theme_light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Star 1",
+      "name": "Star 1",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": true,
+      "workStartFrames": 1,
+      "workEndFrames": 51,
+      "startSeconds": 0.016666666666666666,
+      "endSeconds": 0.85,
+      "loopValue": 1,
+      "speed": 0.4000000059604645
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Theme_Light",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Theme_Dark",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Not Hover",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Over",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "Idle",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    },
+    {
+      "artboard": "Talking_btton",
+      "name": "click",
+      "fps": 60,
+      "durationFrames": 60,
+      "durationSeconds": 1,
+      "workAreaEnabled": false,
+      "workStartFrames": null,
+      "workEndFrames": null,
+      "startSeconds": 0,
+      "endSeconds": 1,
+      "loopValue": 0,
+      "speed": 1
+    }
+  ],
+  "viewModels": [
+    {
+      "name": "ThemeVM",
+      "properties": [
+        {
+          "name": "isDark",
+          "type": "boolean"
+        }
+      ],
+      "instances": [
+        "Instance"
+      ]
+    }
+  ],
+  "bindings": {
+    "status": "unknown",
+    "note": "Rive 2.44.0 exposes ViewModel properties but cannot enumerate which artwork properties are bound to them."
+  },
+  "availableStates": {
+    "status": "unknown",
+    "names": [],
+    "note": "Rive 2.44.0 does not expose a complete state/layer enumeration. Animation names are listed separately."
+  }
+}

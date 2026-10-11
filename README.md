@@ -1,103 +1,72 @@
 # AMYU
 
-Desktop-first embodied companion foundation. The current milestone is **Avatar Correction / Replacement — awaiting human visual approval**. The browser lab now loads an actual third-party Rive character and provides repeatable silent conversation demos. The earlier generated developer character was rejected for visual quality and remains a test fixture only.
+AMYU is a desktop-first embodied companion. The current milestone builds the **Windows Desktop Pet Shell**: a compact floating robot, a small composer, and a silent local conversation demo. **Avatar Lab remains a separate developer surface.** The user's revised milestone authorizes native pet work with the existing prototype robot; it does not approve the artwork as AMYU's final identity.
 
-AMYU is the product/runtime name. A future onboarding flow lets the user choose the companion's personal name. Onboarding is paused until the user explicitly approves this avatar milestone.
+The shell uses Tauri 2, React and the existing renderer-independent avatar architecture. No API key is required. Onboarding, AI providers, microphone streaming, TTS, memory, vision, Skills and Connectors remain out of scope.
 
-## Prerequisites
+## Run
 
-- Node.js **22.12 or newer** and **pnpm 11.19.0**, pinned in `packageManager`.
-- Browser with WebAssembly and Canvas support. Web Audio is used only by the separate audio boundary, not by the silent avatar demos.
-- Native Windows 11 development additionally needs Rust, Microsoft C++ build tools and WebView2. Follow [Tauri's official prerequisites](https://v2.tauri.app/start/prerequisites/). Native validation is outside this corrective milestone.
-
-## Install and review
-
-From the repository root:
+Use Node.js **22.12+** and **pnpm 11.19.0**. Native Windows development also requires Rust, Microsoft C++ build tools and WebView2; see [Windows build instructions](docs/windows-build.md).
 
 ```powershell
 pnpm install --frozen-lockfile
+pnpm dev:desktop
+```
+
+The native main window is the **Pet Shell**. Its menu opens **Avatar Lab · DEV** in a separate, decorated window. For frontend-only development:
+
+```powershell
+# Pet Shell browser preview: http://127.0.0.1:1420
+pnpm --filter @amyu/desktop dev
+
+# Standalone Avatar Lab: http://127.0.0.1:5173
 pnpm dev
 ```
 
-Open `http://127.0.0.1:5173`. Hebrew with RTL is the default; English is available in the lab.
+The desktop frontend also serves the lab at `http://127.0.0.1:1420/?mode=lab`. The browser preview identifies itself explicitly; native movement, minimization and close controls require Tauri. Browser preview resizing does not establish that native resizing works.
 
-- **Play speaking demo** runs for **8 seconds**, with changing synthetic energy and brief rests, then returns to idle with energy zero.
-- **State demo** runs for **15 seconds**: idle 2s → listening 3s → thinking 3s → speaking 5s → idle 2s.
-- These are silent visual demos: no audio playback, AI account, microphone or provider connection.
-- State, emotion, energy, awake, reduced motion, supported gestures, pause/reset, event history and JSON exports remain available. Unsupported artwork controls are disabled or reported explicitly.
-- The rig inspector shows actual asset names, input types, authored animation mappings, attribution and the supported/unsupported/unknown capability matrix. Missing mappings report `UNMAPPED`.
+## Pet interactions
 
-The current asset exposes two native booleans, `isTalking` and `isListening`. AMYU also mixes inspected authored thinking, talking, wave, mouth and eye timelines. Listening combines the native mouth cue with a held authored wave frame, raising a hand near the head/shoulder. Energy changes the weight of authored talking motion; it is not a discovered continuous mouth parameter. **Gaze and head follow are unsupported by this adapter**, so pointer telemetry does not imply visible character tracking.
+- Use the top handle to drag the native window, the bottom-right grip to resize it, or **Pet options → Pet size** for presets. The default is 360 × 460 logical pixels; normal bounds are 300 × 360 through 560 × 700.
+- Toggle the compact chat bar, type a message and send. A local sequence runs **listening → thinking → speaking → idle**, displaying a clearly labeled placeholder reply. There is no backend conversation or audio.
+- Use **Take a nap / Wake up** and **Try a little movement** for sleeping and acting. Clicking the robot greets it or wakes it.
+- The microphone button explains that voice is unavailable; it does not request microphone access.
+- Native geometry persistence restores size and position with monitor work-area bounds. Transparency, framelessness and always-on-top are native window settings; their observed acceptance status is tracked separately from configuration.
 
-See the [avatar correction report](docs/avatar-correction-report.md) for the demo procedure, current limitations, inspection and screenshot review. Agent review and automated tests do not replace the user's visual acceptance.
+See [Pet Shell behavior and limitations](docs/pet-shell.md), [native validation](docs/native-validation.md), and the [manual acceptance checklist](tests/manual-acceptance.md). The current build and validation results are in the [build report](docs/build-report.md).
 
-## Validate and build
+## Validate and package
 
 ```powershell
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
 pnpm check
-```
-
-`pnpm build` builds browser and desktop frontend assets; it does not compile Rust. The [build report](docs/build-report.md) records validation status. Final corrective verification and human review are separate gates.
-
-The historical `pnpm character:build` command regenerates the original developer test fixture. It is not part of the current replacement workflow and does not create or modify the third-party character.
-
-## Native scaffold and recorded blocker
-
-The same shared lab has a Tauri entry point:
-
-```powershell
-pnpm dev:desktop
 pnpm --filter @amyu/desktop native:check
 pnpm --filter @amyu/desktop native:test
 pnpm build:desktop
 ```
 
-The native frontend uses strict loopback port **1420**. This scaffold opens a normal lab window. Installer bundling is disabled.
+`pnpm check` runs lint, TypeScript checks, tests and both frontend builds. It does **not** compile Rust. The Windows native build packages the Pet Shell and its local resources. The [Windows Build workflow](https://github.com/EdenKantor/AMYU/actions/workflows/windows-build.yml) provides an independent Windows build path and downloadable EXE/NSIS artifacts; it does not publish a GitHub release. Read the [Windows build guide](docs/windows-build.md) for prerequisites, output paths and the recorded Application Control / error 4551 issue.
 
-The earlier native attempts used a contained Rust installation in the original generated development workspace. Formatting passed; Windows Application Control blocked dependency DLL/build-script loading with Win32 error **4551**, and no executable was produced. The current source package does not include that scratch toolchain. Preserve the [native validation record](docs/native-validation.md); this avatar correction does not rerun native work or alter host policy.
+## Avatar and developer lab
 
-On Windows, the optional wrapper uses a contained toolchain under this repository's ignored `work/rust` directory when present, or an existing global Rust toolchain:
+The current robot is **Friendly Floating Bot** by **sukeycool**, licensed **CC BY 4.0**. The original `.riv` file is unchanged: 139,255 bytes, SHA-256 `03cf8342c66171d7d5b09a00f363118d16528d372080cbb2d4b21f7d5147dc54`. Attribution stays available in the pet menu and [asset record](assets/character/third-party/README.md). This is a third-party prototype, not AMYU-owned production artwork.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File apps/desktop/native.ps1 dev
-```
+All six semantic states use existing authored Rive timelines. Their quality limits remain explicit: listening resembles a greeting, speech has a small coupled mouth/arm route, thinking and acting share a hologram, and sleeping holds the body still. Independent gaze, head-follow, numeric mouth aperture and independent eyelid control are unsupported. Idle uses the source's authored float/blink motion. No new mascot has been substituted for this milestone.
 
-It also supports `build`, `check`, `test` and `fmt`. It installs nothing, changes only process environment variables and restores them on exit.
+Avatar Lab retains state controls, capability inspection, reset, reduced motion, speech/eye/gesture demos and the 113-second transition stress test. Read the [avatar product review](docs/avatar-deep-review.md), [state design](docs/avatar-state-design.md), [capability audit](docs/friendly-floating-bot-capabilities.md) and [provenance](docs/third-party-assets.md) for evidence. Passing tests and semantic labels do not prove visual quality.
 
-## Character and attribution
+## Architecture and scope
 
-The current default is `assets/character/third-party/expressive-floating.riv`: **Expressive Floating Character Rig (Old Work Share)** by **kouidero**, downloaded 2026-10-03, **66,484 bytes**, with no artwork/file modifications. The source's license link resolves to **CC BY 4.0**. See [asset attribution and license](assets/character/third-party/README.md), [third-party provenance](docs/third-party-assets.md) and [actual inspection](docs/expressive-floating-capabilities.md).
-
-The temporary prototype mascot is not the AMYU production identity. AMYU does not claim ownership of this third-party artwork. A final original production character remains a separate art deliverable.
-
-## Repository and boundaries
+`PetSession` owns local product interaction state independently of React, Rive and the lab. `EmbodimentDirector`, `AvatarController` and local-life behavior remain shared; `RiveAvatarRenderer` maps their frames to the current asset. Native Rust owns window creation and geometry persistence. Narrow Tauri capabilities expose pet window actions and the developer lab command, without arbitrary OS execution.
 
 ```text
-apps/       avatar-lab, desktop (Tauri/Rust), api (reserved)
-packages/   avatar-contract, protocol, embodiment, avatar-rive,
-            audio, observability, shared-ui
-            companion-core, conversation, vision, memory, skills,
-            capabilities, permissions, connectors, user-profile (contracts only)
-providers/  mock-live, gemini-live, openai-live, mock-vision (reserved)
-skills/     companion, desktop-vision, calendar, email (reserved)
-assets/     character, audio
-evals/      conversation, memory, embodiment, skills (reserved)
-docs/       architecture, contracts, provenance, roadmap, ADRs and validation
-tests/      manual-acceptance.md
+apps/desktop/      Pet Shell frontend and Tauri/Rust host
+apps/avatar-lab/   separate browser development surface
+packages/         avatar contracts, embodiment, Rive renderer, shared UI
+assets/           attributed prototype character and supporting resources
+docs/             architecture, build records, reviews and roadmap
+tests/            manual acceptance records
 ```
 
-Semantic intent feeds the deterministic `EmbodimentDirector`; the artwork adapter maps its independent pose to verified Rive controls and timelines. React presents controls and diagnostics. The correction keeps `AvatarController`, local life, `GazeController`, renderer inspection and contract tests independent of this asset.
+The remaining conversation, provider, memory, vision, Skills and Connector directories contain foundations or reserved boundaries for later milestones. The current local demo does not activate those systems. Tray integration, startup registration, click-through, production signing and final original character art are also deferred.
 
-Start with [architecture](docs/architecture.md), [avatar contract](docs/avatar-contract.md), [embodiment](docs/embodiment.md), [Rive specification](docs/rive-character-spec.md), [asset replacement](docs/avatar-assets.md) and [roadmap](docs/roadmap.md). Major decisions are in [ADRs](docs/adr).
-
-## Scope and approval gate
-
-There is no live/mock conversation, provider integration, memory persistence, onboarding, screen/camera capture, Skills UI, accounts or executable OS tool. Transparent desktop presence, tray, drag/position persistence, global cursor tracking and multi-monitor safety are later work.
-
-Candidate A is selected for human review after actual Candidate B evaluation: B exposes no mouth/talking animation or energy control and was not integrated. A's native Listening animation affects only five mouth paths and provides no head/eye/body cue; AMYU adds a held `Waving` frame at 30% progress and 80% mix. Root agent review found this visibly distinct from idle and the original thinking hand-to-chin pose clear, but human readability/approval remains pending. Authored idle/start-pose restoration addresses earlier thinking/wave/speech pose latching. Continuous mouth amplitude, full emotion blend, gaze/head follow, visemes and six gestures are unsupported by the current adapter; blink and wave are supported after browser verification of actual eye closure/opening, an autonomous blink, authored waving and neutral return. The capability panel preserves these limits.
-
-The user must judge idle life, readable listening/thinking/speaking and acceptable mouth movement using the browser demo. A rejection of listening, thinking, speaking or mouth keeps the milestone incomplete. Record approval in [manual acceptance](tests/manual-acceptance.md). Onboarding and native corrective work remain paused; this correction is prepared for the user-requested GitHub push.
+Start with [architecture](docs/architecture.md), [avatar contract](docs/avatar-contract.md), [embodiment](docs/embodiment.md), and the [revised roadmap](docs/roadmap.md). After this milestone, stop for the user's review before beginning another product stage.

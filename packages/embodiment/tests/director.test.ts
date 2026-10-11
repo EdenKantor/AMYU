@@ -101,7 +101,32 @@ describe('EmbodimentDirector', () => {
     expect(advance(director, 3000).eyeOpenness).toBeLessThan(0.06);
     director.reactToClick();
     expect(director.tick(16).state).toBe('idle');
-    expect(advance(director, 3000).eyeOpenness).toBeGreaterThan(0.9);
+    expect(advance(director, 3000).eyeOpenness).toBeGreaterThan(0.8);
+  });
+
+  it('uses softer, state-specific eyes and fully closes sleeping lids', () => {
+    const director = new EmbodimentDirector({ seed: 99 });
+    const maxOpen: Partial<Record<AvatarFrame['state'], number>> = {};
+    for (const state of conversationStates) {
+      director.setConversationState(state); advance(director, 2000);
+      let maximum = 0;
+      for (let i = 0; i < 100; i++) maximum = Math.max(maximum, director.tick(10).eyeOpenness);
+      maxOpen[state] = maximum;
+    }
+    expect(maxOpen.idle).toBeLessThan(0.86);
+    expect(maxOpen.listening).toBeGreaterThan(maxOpen.idle! + 0.06);
+    expect(maxOpen.thinking).toBeLessThan(maxOpen.idle! - 0.06);
+    expect(maxOpen.sleeping).toBe(0);
+  });
+  it('cancels active and queued gestures while retaining state, affect and blended pose', () => {
+    const director = new EmbodimentDirector(); director.setConversationState('thinking');
+    director.setEmotion('happy', 0.8); advance(director, 1200);
+    director.triggerGesture('wave'); director.tick(20); director.triggerGesture('nod');
+    const before = director.getSnapshot(); director.cancelGestures();
+    const after = director.getSnapshot();
+    expect(after.gesture).toBeNull(); expect(after.state).toBe('thinking');
+    expect(after.emotionWeights).toEqual(before.emotionWeights); expect(after.stateWeights).toEqual(before.stateWeights);
+    expect(advance(director, 2000).gesture).toBeNull();
   });
 
   it('bounds the gesture backlog under repeated aggressive clicking', () => {

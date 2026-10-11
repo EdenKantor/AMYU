@@ -20,6 +20,11 @@ export interface EmbodimentOptions {
   personality?: Partial<PersonalityProfile>;
 }
 
+/** Renderer-independent resting lids; the asset decides how to draw them. */
+export const stateEyeOpenness: Record<ConversationState, number> = {
+  idle: 0.84, listening: 0.93, thinking: 0.74, speaking: 0.87, acting: 0.91, sleeping: 0,
+};
+
 function weights<T extends string>(names: readonly T[], first: T): Record<T, number> {
   return Object.fromEntries(names.map((name) => [name, name === first ? 1 : 0])) as Record<T, number>;
 }
@@ -106,7 +111,7 @@ export class EmbodimentDirector implements AvatarController {
 
   pointerLeave(): void { this.pointer = null; }
 
-  reactToClick(): void {
+  reactToClick(supportedGestures?: readonly Gesture[]): void {
     if (this.state === 'sleeping') this.setConversationState('idle');
     this.clickTimes = this.clickTimes.filter((time) => this.timeMs - time < 1400);
     this.clickTimes.push(this.timeMs);
@@ -114,8 +119,25 @@ export class EmbodimentDirector implements AvatarController {
     this.clickResponse = this.personality.playfulness;
     if (this.clickTimes.length >= 4) {
       this.playfulConfusion = 1;
-      this.triggerGesture('shake_head');
-    } else this.triggerGesture(this.clickTimes.length % 2 === 0 ? 'head_tilt' : 'bounce');
+    }
+    if (supportedGestures) {
+      // Coalesce a visible reaction instead of queueing unsupported movement.
+      const supported = supportedGestures.filter(isGesture);
+      const gesture = supported.includes('wave') ? 'wave' : supported[0];
+      this.gestureQueue = [];
+      if (!gesture) this.cancelGestures();
+      else if (this.activeGesture?.name !== gesture) {
+        this.cancelGestures();
+        this.triggerGesture(gesture);
+      }
+    } else if (this.clickTimes.length >= 4) this.triggerGesture('shake_head');
+    else this.triggerGesture(this.clickTimes.length % 2 === 0 ? 'head_tilt' : 'bounce');
+  }
+
+  /** Interrupt movement without resetting semantic intent, affect or personality. */
+  cancelGestures(): void {
+    this.gestureQueue = []; this.activeGesture = null;
+    this.snapshot = { ...this.snapshot, gesture: null };
   }
 
   triggerGesture(gesture: Gesture): void {
@@ -224,10 +246,13 @@ export class EmbodimentDirector implements AvatarController {
     const awake = 1 - state.sleeping * 0.95;
     const t = this.timeMs / 1000;
     const speakingMotion = Math.sin(t * 5.1) * this.speechEnergy * 0.06;
+    const restingEyes = conversationStates.reduce((sum, name) => sum + state[name] * stateEyeOpenness[name], 0);
+    const eyeOpenness = clamp((restingEyes + life.eyeVariation * (1 - state.sleeping)) * (1 - life.blink));
     const lifecycleLean = this.lifecycle ? Math.sin((this.lifecycle.elapsedMs / 1500) * Math.PI) * (this.lifecycle.kind === 'wake' ? -0.08 : 0.06) : 0;
     return {
       timeMs: this.timeMs, state: this.state, emotion: this.emotion,
       emotionIntensity: this.intensity, presence: this.presence, awake: this.state !== 'sleeping',
+      reducedMotion: this.reducedMotion,
       stateWeights: { ...state }, emotionWeights: { ...e }, gaze: normalizeGaze(this.gaze),
       headRotationX: clamp((gaze.head.x + life.headX * calm + pose.headX) * motion, -1, 1),
       headRotationY: clamp((gaze.head.y * 0.72 + life.headY * calm + pose.headY + speakingMotion) * motion + state.sleeping * 0.18, -1, 1),
@@ -236,7 +261,7 @@ export class EmbodimentDirector implements AvatarController {
       bodyLeanY: clamp((life.postureY + pose.leanY + lifecycleLean - anticipation * 0.09 + state.acting * Math.sin(t * 1.8) * 0.03) * motion + state.sleeping * 0.12, -1, 1),
       breathing: life.breathing,
       blink: life.blink,
-      eyeOpenness: clamp(awake * (1 - life.blink)),
+      eyeOpenness: eyeOpenness < 0.001 ? 0 : eyeOpenness,
       eyeScale: clamp(1 + (e.surprised * 0.17 + e.excited * 0.08 - e.concerned * 0.06) * affect, 0.75, 1.2),
       eyeSquint: clamp(e.amused * 0.3 + e.focused * 0.18 + this.playfulConfusion * 0.12),
       mouthOpen: clamp(this.speechEnergy * (0.3 + state.speaking * 0.7) + e.surprised * 0.12 * awake),

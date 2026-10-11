@@ -22,10 +22,11 @@ export function diagnoseAnimationMappings(
       mix: clamp(value?.mix ?? 0),
     };
     if (!actual.has(spec.name)) diagnostic.reason = 'Requested authored animation is absent from this artboard.';
-    else if (values && (!value || !Number.isFinite(value.mix) || (value.progress !== undefined && !Number.isFinite(value.progress)))) {
+    else if (values && (!value || !Number.isFinite(value.mix) || (value.progress !== undefined && !Number.isFinite(value.progress)) || (value.speed !== undefined && !Number.isFinite(value.speed)))) {
       diagnostic.status = 'UNMAPPED'; diagnostic.reason = 'Adapter did not produce a valid animation value.';
     }
     if (value?.progress !== undefined) diagnostic.progress = clamp(value.progress);
+    if (value?.speed !== undefined) diagnostic.speed = clamp(value.speed, 0.1, 2.5);
     return diagnostic;
   });
 }
@@ -53,6 +54,11 @@ export class RiveAnimationMixer {
     for (const diagnostic of diagnostics) {
       const clip = this.clips.get(diagnostic.animation);
       if (stage && clip && (clip.spec.stage ?? 'overlay') !== stage) continue;
+      // The authored speech cycle keeps its clock through quiet syllables. Gain
+      // changes and a held listening pose must not restart the mouth/body loop.
+      if (clip?.spec.mode === 'loop' && clip.spec.keepPhaseWhenInactive && diagnostic.status === 'MAPPED') {
+        clip.seconds += elapsed * (diagnostic.speed ?? clip.spec.speed ?? 1);
+      }
       if (!clip || diagnostic.status !== 'MAPPED' || diagnostic.mix <= 0) {
         if (clip) clip.active = false;
         continue;
@@ -61,8 +67,10 @@ export class RiveAnimationMixer {
         clip.instance.time = clip.start + (clip.end - clip.start) * diagnostic.progress;
         clip.instance.advance(0);
       } else if (clip.spec.mode === 'loop') {
-        if (!clip.active) clip.seconds = 0;
-        clip.seconds += elapsed * (clip.spec.speed ?? 1);
+        if (!clip.spec.keepPhaseWhenInactive) {
+          if (!clip.active) clip.seconds = 0;
+          clip.seconds += elapsed * (diagnostic.speed ?? clip.spec.speed ?? 1);
+        }
         const length = clip.end - clip.start;
         clip.instance.time = clip.start + (length > 0 ? clip.seconds % length : 0);
         clip.instance.advance(0);
@@ -81,6 +89,15 @@ export class RiveAnimationMixer {
       clip.instance.time = clip.start + (clip.end - clip.start) * clamp(clip.spec.resetAtRest);
       clip.instance.advance(0); clip.instance.apply(1);
     }
+  }
+  /** Actual persistent clock phase, including quiet frames; poses keep theirs. */
+  inspect(diagnostics: readonly AnimationMappingDiagnostic[]): AnimationMappingDiagnostic[] {
+    return diagnostics.map((diagnostic) => {
+      const clip = this.clips.get(diagnostic.animation);
+      if (!clip || clip.spec.mode !== 'loop' || diagnostic.progress !== undefined) return { ...diagnostic };
+      const length = clip.end - clip.start;
+      return { ...diagnostic, progress: length > 0 ? (clip.seconds % length) / length : 0 };
+    });
   }
   dispose(): void {
     for (const { instance } of this.clips.values()) instance.delete();

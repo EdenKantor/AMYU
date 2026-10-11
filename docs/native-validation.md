@@ -1,5 +1,25 @@
 # Native validation record
 
+## Revised Pet Shell milestone — 2026-10-11
+
+The product entry point is now the compact Pet Shell. Avatar Lab remains a separate developer window. Native configuration enables transparency, frameless presentation, always-on-top, resize bounds and NSIS packaging. Those settings are implemented, but this host has not yet run the native app successfully.
+
+The existing toolchain was reused from the earlier workspace through `native.ps1 -RustRoot`; no Rust installation or security configuration was changed. Verified versions: rustc 1.99.0 and cargo 1.99.0. Native outputs were directed to this repository's ignored `work/native-target`.
+
+| Actual attempt | Result |
+| --- | --- |
+| `cargo fmt --check` | PASS |
+| `cargo check --locked` | Windows Application Control blocked `debug/build/generic-array-addf822b734c4982/build-script-build`, error **4551** |
+| `native.ps1 build` (locked Tauri release + NSIS) | Frontend built; Application Control blocked `release/build/zmij-b6b5019f2cb5540e/build-script-build`, error **4551** |
+| Local native Rust tests / executable / installer | Not completed because dependency build scripts are blocked |
+| GitHub Windows compile / artifacts | Workflow added; pending first verified result in [build report](build-report.md) |
+
+Logs are retained locally in ignored `work/native-check.log` and `work/native-build.log`. The newer attempts fail before compiling AMYU's native source, so they establish the continuing host-policy blocker, not that the native source is error-free. Hosted CI is responsible for the remaining compilation checks. No Application Control policy or other host security control was disabled, weakened or bypassed. Package scripts no longer request a PowerShell execution-policy override.
+
+Native acceptance still requires actual launch, rendered animation, compact composer/mock flow, drag, resize, close/relaunch persistence, always-on-top/transparency and separate Avatar Lab checks. Browser validation cannot certify these Windows behaviors. Multi-monitor/DPI logic has focused Rust tests but still requires real hardware validation.
+
+## Preserved earlier native investigation
+
 Date: **2026-10-03**. Target: Windows 11 x64. These attempts were made in the original development workspace before publication at the repository root. The host has Microsoft C++ tooling and WebView2 154.0.4258.53. Node is 24.12.0; pnpm is 11.19.0. This is a preserved validation history, not a new native run from the published source.
 
 ## Contained toolchain

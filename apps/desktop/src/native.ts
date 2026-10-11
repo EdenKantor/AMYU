@@ -1,10 +1,10 @@
 import { invoke } from '@tauri-apps/api/core';
 import { z } from 'zod';
 
-/** One metadata-only IPC contract. No executable desktop capability is exposed. */
+/** Metadata only. Pet window controls do not grant arbitrary execution. */
 export const nativeDiagnosticsSchema = z.object({
   product: z.literal('AMYU'),
-  milestone: z.literal('avatar-lab'),
+  milestone: z.literal('pet-shell'),
   platform: z.enum(['windows', 'macos', 'linux']),
   executableCapabilitiesEnabled: z.literal(false),
 }).strict();

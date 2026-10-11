@@ -1,29 +1,31 @@
 # Milestone roadmap
 
-Current milestone: **Avatar Correction / Replacement**. The user has not accepted the avatar's visual quality. Foundation and architecture remain useful; the immediate work is real researched artwork, readable conversation states and dynamic visible speech. Onboarding is paused.
+Current milestone: **Windows Native Desktop Pet Shell**, following the user's revised direction. The main product is a compact floating pet with a composer; Avatar Lab remains a separate developer surface. This direction supersedes the previous requirement to finish avatar selection before doing native shell work. It does not grant final visual approval of the prototype robot or authorize onboarding and providers.
 
-| Order | Milestone | Gate |
+| Stage | Scope | Gate |
 | --- | --- | --- |
-| 1 | Foundation / architecture / avatar runtime | Existing boundaries and tests retained; generated artwork rejected for product quality |
-| 2 | Avatar Correction / Replacement — current | Actual downloaded researched `.riv`; inspect controls; visible idle/listening/thinking/speaking; 8s silent speaking demo and 15s state demo; attribution; ten screenshots; user visual approval |
-| 3 | Onboarding — paused | Starts only after explicit user avatar approval; Hebrew default, editable identities, optional context, separate permissions and durable profiles |
-| 4 | Desktop shell | Transparent pet and management panel; focus safety; drag/position persistence; multi-monitor safe; tray; hide/show; startup disabled by default |
-| 5 | Mock conversation | Local sample audio; normalized events; lip sync; bilingual transcript; interruption measured |
-| 6 | Realtime voice | Replaceable provider; Hebrew/English switching; streaming; reconnect; barge-in; sessions and latency |
-| 7 | Screen awareness | Explicit approved capture through native gateway; visible indicator; ephemeral frame; normalized observation |
-| 8 | Durable memory | Profile/facts/preferences/projects; correction and deletion; clean repository; no premature vector infrastructure |
-| 9 | Skills | Small versioned registry; capability declarations; permission policy; evaluation gates |
-| 10 | Connectors | Scoped web/search, calendar and email; consequential writes confirmed |
-| Later | Polish and expansion | Original sonic identity, startup sequence, additional devices/renderers only after earlier gates |
+| Foundation — retained | Renderer-independent avatar contracts, deterministic embodiment and local life, original source provenance | Existing boundaries and tests remain intact |
+| Avatar research — retained | Friendly Floating Bot is the current soft robot prototype; A is historical and C was rejected | Known visual limitations remain documented; final artwork approval is separate |
+| **Windows Desktop Pet — current** | Tauri Pet Shell, compact composer, six semantic states, local silent mock flow, drag/resize, saved geometry, separate lab, native packaging and Windows CI | Native build and launch evidence; actual pet interaction/visual acceptance; clear local 4551 status; GitHub push and user review |
+| Native acceptance and polish — recommended next if any current checks remain pending | Test the built artifact on an authorized Windows 11 desktop; verify transparency, focus, drag/resize, restart persistence, monitor/DPI changes and production resources | Close the remaining manual acceptance items without treating browser or CI checks as desktop proof |
+| Onboarding — paused | Hebrew default, editable identities, optional context, separate permissions and durable profiles | Explicit user approval to start this stage |
+| Conversation integration — paused | Replace the local demo with normalized provider events, audio boundaries and interruption behavior | A separately approved scope; retain renderer independence and truthful connection state |
+| Realtime voice — paused | Replaceable provider, Hebrew/English switching, streaming, reconnect, barge-in and latency | Permission and performance acceptance |
+| Screen awareness — paused | Explicit capture, visible indication, ephemeral frames and normalized observations | Separate capture/permission review |
+| Durable memory — paused | User-correctable profiles, facts, preferences and projects with deletion | Separately approved data model and persistence |
+| Skills and Connectors — paused | Versioned capability declarations, scoped integrations and permission policy | Separate functional and consequential-action acceptance |
+| Later polish | Original character and sonic identity, tray/startup choices, additional renderers or devices | User-approved priority after the earlier gates |
 
-## Readiness rule
+## Current acceptance rule
 
-Automated tests and telemetry do not decide visible avatar quality. The current milestone remains **not accepted** until real third-party artwork is integrated and the user approves it visually. The user must distinguish listening, thinking and speaking without labels and accept the mouth/talking motion. A negative answer for any of those behaviors keeps the milestone incomplete.
+The native app must open the **Pet Shell** by default, render and animate the robot, accept text in the compact bar, and demonstrate listening → thinking → speaking → idle. Acting and sleeping must also be available in the product shell. Dragging, real native resizing and restoration after restart require native acceptance; a browser layout check is useful but insufficient.
 
-Browser Avatar Lab is sufficient for this corrective selection. Native Windows error 4551 remains recorded in [native validation](native-validation.md); do not spend this milestone bypassing or solving it. Native runtime and long-session desktop acceptance remain later validation work. Do not generate another mascot or redesign the old developer rig. Candidate order is Expressive Floating Character Rig, AI Orb Mascot, then Interactive Character Rig. Candidate B was actually inspected in scratch and not integrated because no mouth/talking clip or energy control was exposed. Candidate A remains preferred, with its native mouth-only Listening limitation and AMYU-composed attention cue requiring human review. Stop after presenting screenshots, repeatable demo instructions and the current results for human review. Do not begin onboarding until the user explicitly approves the avatar.
+Build tests establish code and packaging health. A CI process launch establishes only the observations recorded for that run. Neither substitutes for a manual desktop review. Track exact evidence in [native validation](native-validation.md), [build report](build-report.md), and [manual acceptance](../tests/manual-acceptance.md). Preserve the historical 4551 record; fix repository issues and use Windows CI while respecting host policy.
+
+Do not replace the mascot during this milestone without an actual blocker. The current authored asset still has limited speech, greeting-like listening and a still sleeping pose. These are disclosed in the [avatar review](avatar-deep-review.md), not hidden by state labels.
 
 ## Explicit exclusions
 
-No GLB/Three.js character, Electron, AR/WebXR, mobile, Unity/Unreal, continuous webcam or cloud screen stream, arbitrary shell, unrestricted computer control, skill marketplace/download execution, autonomous production-prompt rewriting, payments, voice cloning, large connector catalog or elaborate cloud infrastructure. No copied JARVIS music, dialogue or assets.
+No onboarding, real AI provider, microphone streaming, TTS, memory, vision, Skills, Connectors, AR/mobile, or full tray ecosystem is included in this milestone. No copied OpenAI mascot, logo or proprietary UI artwork. No arbitrary shell execution, unrestricted computer control or security-policy bypass.
 
-For each future milestone: inspect architecture, update docs and ADRs, identify packages, implement, add appropriate tests, run lint/typecheck/tests/build, record manual checks and remaining issues. Never turn a skipped check into a passing result.
+After the native pet milestone is pushed and reported, **stop and wait for the user's approval**. Any unfinished native acceptance remains visible rather than being converted into a passing result.

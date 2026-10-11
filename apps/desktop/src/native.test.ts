@@ -5,12 +5,12 @@ describe('native diagnostics trust boundary', () => {
   it('accepts the restricted camelCase Rust metadata contract', () => {
     expect(nativeDiagnosticsSchema.parse({
       product: 'AMYU',
-      milestone: 'avatar-lab',
+      milestone: 'pet-shell',
       platform: 'windows',
       executableCapabilitiesEnabled: false,
     })).toEqual({
       product: 'AMYU',
-      milestone: 'avatar-lab',
+      milestone: 'pet-shell',
       platform: 'windows',
       executableCapabilitiesEnabled: false,
     });
@@ -19,7 +19,7 @@ describe('native diagnostics trust boundary', () => {
   it('rejects unexpected capabilities and unknown payload fields', () => {
     const metadata = {
       product: 'AMYU',
-      milestone: 'avatar-lab',
+      milestone: 'pet-shell',
       platform: 'windows',
       executableCapabilitiesEnabled: false,
     };

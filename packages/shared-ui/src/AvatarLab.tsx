@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { conversationStates, emotions, gestures, type AvatarFrame, type ConversationState } from '@amyu/avatar-contract';
-import { RiveAvatarRenderer, type RiveAssetInfo, type MappingDiagnostic, type AnimationMappingDiagnostic } from '@amyu/avatar-rive';
+import { RiveAvatarRenderer, reviewCandidates, type RiveAssetInfo, type MappingDiagnostic, type AnimationMappingDiagnostic } from '@amyu/avatar-rive';
 import { FrameMetrics, BoundedEventLog } from '@amyu/observability';
 import { LabSession } from './session';
 import { copy, type Language } from './i18n';
 import { Icon, type IconName } from './Icons';
 import { AssetInspector } from './AssetInspector';
 import { DemoControls } from './DemoControls';
+import { AnimationAuditControls, type AnimationPreview } from './AnimationAuditControls';
 
 type View = 'studio' | 'stream' | 'contract';
 type Stage = 'mist' | 'dusk' | 'paper';
@@ -42,14 +43,25 @@ export function AvatarLab() {
   const [assetInfo, setAssetInfo] = useState<RiveAssetInfo | null>(null);
   const [error, setError] = useState('');
   const [retry, setRetry] = useState(0);
+  const [preview, setPreview] = useState<AnimationPreview | null>(null);
+  const [candidateId, setCandidateId] = useState(reviewCandidates[0].id);
+  const candidate = reviewCandidates.find(item => item.id === candidateId) ?? reviewCandidates[0];
   const [, setRevision] = useState(0);
   const t = copy[language];
   const gazeSupported = assetInfo?.capabilities.gaze === 'supported';
-  const poseSupported = (field: string) => field === 'smile' || (field === 'eyeOpenness' && assetInfo?.capabilities.blink !== 'unsupported');
+  const poseSupported = (field: string) => status === 'ready' && (
+    (field === 'smile' && ['supported', 'partial'].includes(assetInfo?.reviewSupport?.emotions.happy?.status ?? ''))
+    || (field === 'eyeOpenness' && assetInfo?.capabilities.blink === 'supported')
+    || (field === 'mouthOpen' && assetInfo?.capabilities.continuousMouth === 'supported')
+    || (field === 'headTilt' && assetInfo?.capabilities.headControl === 'supported')
+    || (field === 'frown' && assetInfo?.capabilities.emotionBlend === 'supported')
+  );
   const refresh = () => { setFrame(session.frame); setRevision(value => value + 1); };
-  const action = (fn: () => void) => { fn(); refresh(); };
-  const openView = (next: View) => { if (next !== 'studio' && session.demo) session.stopDemo(); setView(next); refresh(); };
-  const clickCharacter = () => action(() => { session.click(); if (assetInfo && assetInfo.capabilities.gestures.wave !== 'unsupported') session.gesture('wave'); rendererRef.current?.reactToClick(); });
+  const resetRig = () => { rendererRef.current?.reset(); setPreview(null); session.reset(); };
+  const action = (fn: () => void) => { if (preview) { rendererRef.current?.setAnimationPreview(null); setPreview(null); } fn(); refresh(); };
+  const auditAnimation = (value: AnimationPreview | null) => { if (!rendererRef.current || status !== 'ready') return; if (session.demo) session.stopDemo(); rendererRef.current.setAnimationPreview(value); setPreview(value); refresh(); };
+  const openView = (next: View) => { if (next !== 'studio') { if (session.demo) session.stopDemo(); setPreview(null); rendererRef.current?.setAnimationPreview(null); } setView(next); refresh(); };
+  const clickCharacter = () => action(() => { session.click(gestures.filter(gesture => assetInfo?.capabilities.gestures[gesture] === 'supported')); rendererRef.current?.reactToClick(); });
 
   useEffect(() => {
     document.documentElement.lang = language;
@@ -72,9 +84,10 @@ export function AvatarLab() {
     let renderer: RiveAvatarRenderer | null = null;
     const controller = new AbortController();
     setStatus('loading');
+    setPreview(null);
     const observer = new ResizeObserver(() => renderer?.resize());
     observer.observe(canvas);
-    RiveAvatarRenderer.create(canvas, { signal: controller.signal }).then(value => {
+    RiveAvatarRenderer.create(canvas, { signal: controller.signal, assetUrl: candidate.assetUrl, adapter: candidate.adapter }).then(value => {
       if (disposed) { value.dispose(); return; }
       renderer = value; rendererRef.current = value; renderer.resize();
       setAssetInfo(renderer.assetInfo);
@@ -86,10 +99,11 @@ export function AvatarLab() {
       if (disposed) return;
       const message = reason instanceof Error ? reason.message : String(reason);
       if (session.demo) session.stopDemo();
+      setPreview(null);
       setStatus('error'); setError(message); session.log('renderer.error', message);
     });
     return () => { disposed = true; controller.abort(); observer.disconnect(); if (rendererRef.current === renderer) rendererRef.current = null; renderer?.dispose(); };
-  }, [session, retry, view]);
+  }, [session, retry, view, candidate]);
 
   useEffect(() => {
     let raf = 0;
@@ -109,6 +123,7 @@ export function AvatarLab() {
             const message = reason instanceof Error ? reason.message : String(reason);
             renderer.dispose(); rendererRef.current = null;
             if (session.demo) session.stopDemo();
+            setPreview(null);
             setStatus('error'); setError(message); session.log('renderer.error', message);
           }
         }
@@ -148,18 +163,23 @@ export function AvatarLab() {
       if (event.altKey || event.ctrlKey || event.metaKey || (event.target instanceof HTMLElement && ['INPUT', 'TEXTAREA', 'SELECT', 'BUTTON'].includes(event.target.tagName))) return;
       const stateKeys: Record<string, ConversationState> = { i: 'idle', l: 'listening', t: 'thinking', s: 'speaking', a: 'acting', z: 'sleeping' };
       const state = stateKeys[event.key.toLowerCase()];
+      if ((state || event.key.toLowerCase() === 'r') && preview) { rendererRef.current?.setAnimationPreview(null); setPreview(null); }
       if (state) session.setState(state);
-      else if (event.key.toLowerCase() === 'r') session.reset();
+      else if (event.key.toLowerCase() === 'r') resetRig();
       else return;
       setRevision(v => v + 1);
     };
     window.addEventListener('keydown', key); return () => window.removeEventListener('keydown', key);
-  }, [session]);
+  }, [session, preview]);
 
   function directGaze(event: PointerEvent<HTMLDivElement>) {
     const rect = event.currentTarget.getBoundingClientRect();
     session.gaze(Math.max(-1, Math.min(1, (event.clientX - rect.left) / rect.width * 2 - 1)), Math.max(-1, Math.min(1, (event.clientY - rect.top) / rect.height * 2 - 1)));
     refresh();
+  }
+  function nativePointer(kind: 'down' | 'move' | 'up' | 'exit', event: PointerEvent<HTMLCanvasElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    rendererRef.current?.forwardPointer(kind, event.clientX - rect.left, event.clientY - rect.top, event.pointerId);
   }
   const stateOptions = conversationStates;
   const eventList = (compact: boolean) => <div className={`event-list ${compact ? 'compact' : ''}`}>
@@ -183,31 +203,32 @@ export function AvatarLab() {
     <div className="main-shell">
       <header className="topbar"><div className="breadcrumb">AMYU <span>/</span> <strong>{t.lab}</strong></div><div className="topbar-actions"><span className="offline-badge"><span/>{t.offline}</span><select aria-label="Language / שפה" value={language} onChange={event => setLanguage(event.target.value as Language)}><option value="he">עברית</option><option value="en">English</option></select></div></header>
       <main>
-        <div className="page-heading"><div><div className="eyebrow">EMBODIMENT STUDIO</div><h1>{t.lab}<span className="heading-dot">.</span></h1><p>{t.subtitle}</p></div><div className="heading-actions"><button className="button secondary" onClick={() => action(() => session.reset())}><Icon name="reset"/>{t.reset}</button></div></div>
+        <div className="page-heading"><div><div className="eyebrow">EMBODIMENT STUDIO</div><h1>{t.lab}<span className="heading-dot">.</span></h1><p>{t.subtitle}</p></div><div className="heading-actions"><button className="button secondary" onClick={() => action(resetRig)}><Icon name="reset"/>{t.reset}</button></div></div>
 
-        {view === 'studio' && <DemoControls session={session} language={language} action={action} ready={status === 'ready'}/>}
+        {import.meta.env.DEV && view === 'studio' && <DemoControls reset={resetRig} session={session} language={language} action={action} ready={status === 'ready'} info={assetInfo} diagnostics={animationInspectionRef.current?.(frame) ?? []} candidateId={candidate.id} onCandidate={id => { if (id !== candidate.id) action(() => { session.reset(); setAssetInfo(null); setStatus('loading'); setCandidateId(id); }); }}/>}
 
         {view === 'studio' && <div className={`studio-grid ${inspector ? '' : 'wide'}`}>
           <section className={`stage-panel stage-${stage}`} aria-label={t.stage}>
             <div className="stage-top"><button className="rig-label" onClick={() => openView('contract')}><span className="tiny-mark"/>{t.rig}<span className="version-pill">v0.1</span></button><button className="icon-button" title={inspector ? t.closeInspector : t.openInspector} aria-label={inspector ? t.closeInspector : t.openInspector} onClick={() => setInspector(value => !value)}><Icon name="expand"/></button></div>
             <div className="stage-grid"/><div className="stage-orbit orbit-one"/><div className="stage-orbit orbit-two"/>
-            <div className="stage-caption"><span>{t.rigTag}</span><h2>{t.states[frame.state]}</h2></div>
+            <div className="stage-caption"><span>{preview ? 'AUTHORED TIMELINE AUDIT' : t.rigTag}</span><h2>{preview ? `${preview.name} · ${Math.round(preview.progress * 100)}%` : t.states[frame.state]}</h2></div>
             <div className="canvas-wrap" style={{ transform: `scale(${zoom / 100})` }}>
-              <canvas ref={canvasRef} className="avatar-canvas" role="button" tabIndex={0} aria-label={language === 'he' ? 'לחיצה על הדמות לתגובה מקומית' : 'Click the character for a local reaction'} onClick={clickCharacter} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); clickCharacter(); } }}/>
+              <canvas ref={canvasRef} className="avatar-canvas" role="button" tabIndex={0} aria-label={language === 'he' ? 'לחיצה על הדמות לתגובה מקומית' : 'Click the character for a local reaction'} onPointerDown={event => nativePointer('down', event)} onPointerMove={event => nativePointer('move', event)} onPointerUp={event => nativePointer('up', event)} onPointerLeave={event => nativePointer('exit', event)} onPointerCancel={event => nativePointer('exit', event)} onClick={clickCharacter} onKeyDown={event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); clickCharacter(); } }}/>
             </div>
             {status !== 'ready' && <div className="renderer-overlay" role="status"><Icon name="spark" size={26}/><strong>{status === 'loading' ? t.loading : t.failed}</strong>{status === 'error' && <><p>{error}</p><button className="button secondary" onClick={() => setRetry(v => v + 1)}>{t.retry}</button></>}</div>}
-            <div className="stage-hint"><p><Icon name="cursor" size={14}/>{t.stageHelp}</p>{assetInfo?.attribution && <span className="asset-credit"><a href={assetInfo.attribution.sourceUrl} target="_blank" rel="noreferrer">{assetInfo.attribution.title}</a> · {assetInfo.attribution.creator} · <a href={assetInfo.attribution.licenseUrl} target="_blank" rel="noreferrer">{assetInfo.attribution.license}</a></span>}</div>
+            <div className="stage-hint"><p><Icon name="cursor" size={14}/>{assetInfo?.capabilities.gestures.wave === 'supported' ? t.stageHelp : heLabel(language, 'בחנו את התגובות המקוריות בעזרת ההדגמות.', 'Use the demos to review the authored reactions.')}</p>{assetInfo?.attribution && <span className="asset-credit"><a href={assetInfo.attribution.sourceUrl} target="_blank" rel="noreferrer">{assetInfo.attribution.title}</a> · {assetInfo.attribution.creator} · <a href={assetInfo.attribution.licenseUrl} target="_blank" rel="noreferrer">{assetInfo.attribution.license}</a></span>}</div>
             <div className="stage-bottom"><span className="life-indicator"><span className={`status-dot ${session.paused ? 'amber' : ''}`}/>{session.paused ? t.paused : t.alive}</span><div className="stage-tools"><button className="icon-button" aria-label={session.paused ? t.resume : t.pause} title={session.paused ? t.resume : t.pause} onClick={() => action(() => session.setPaused(!session.paused))}><Icon name={session.paused ? 'play' : 'pause'} size={16}/></button><span className="divider"/><button className="zoom-button" onClick={() => setZoom(v => v >= 130 ? 70 : v + 10)} aria-label="Zoom">{zoom}%</button><span className="divider"/><div className="stage-swatches">{(['mist', 'paper', 'dusk'] as Stage[]).map(value => <button key={value} className={`swatch swatch-${value} ${stage === value ? 'selected' : ''}`} title={t[value]} aria-label={t[value]} aria-pressed={stage === value} onClick={() => setStage(value)}/>)}</div></div></div>
           </section>
 
           {inspector && <aside className="inspector" aria-label={t.controls}>
             <div className="inspector-heading"><span><Icon name="studio" size={16}/>{t.controls}</span><span className="live-dot"/></div>
             <div className="inspector-body">
+              {import.meta.env.DEV && <AnimationAuditControls info={assetInfo} language={language} preview={preview} onPreview={auditAnimation} ready={status === 'ready'}/>}
               <section className="control-section"><div className="section-title"><h3>{t.state}</h3><span className="section-number">01</span></div><p className="control-help">{t.stateHelp}</p><div className="state-grid">{stateOptions.map(state => <button key={state} className={`state-button ${session.state === state ? 'selected' : ''}`} onClick={() => action(() => session.setState(state))} aria-pressed={session.state === state}><Icon name={state as IconName} size={18}/><span>{t.states[state]}</span></button>)}</div></section>
-              <section className="control-section"><div className="section-title"><h3>{t.emotion}</h3><span className="section-number">02</span></div><select className="emotion-select" aria-label={t.emotion} value={session.emotion} onChange={event => action(() => session.setEmotion(event.target.value as typeof session.emotion))}>{emotions.map(emotion => <option key={emotion} value={emotion}>{t.emotions[emotion]}</option>)}</select><p className="control-help compact-help">{assetInfo?.capabilities.emotionBlend !== 'supported' && t.emotionLimited}</p><label className="range-label"><span>{t.intensity}</span><output>{session.intensity.toFixed(2)}</output></label><input type="range" min="0" max="1" step="0.01" value={session.intensity} aria-label={t.intensity} onChange={event => action(() => session.setIntensity(Number(event.target.value)))}/><div className="range-endpoints"><span>0.0</span><span>1.0</span></div></section>
+              <section className="control-section"><div className="section-title"><h3>{t.emotion}</h3><span className="section-number">02</span></div><select className="emotion-select" aria-label={t.emotion} value={session.emotion} onChange={event => action(() => session.setEmotion(event.target.value as typeof session.emotion))}>{emotions.map(emotion => <option key={emotion} value={emotion}>{t.emotions[emotion]}{assetInfo?.reviewSupport?.emotions[emotion] && ` · ${assetInfo.reviewSupport.emotions[emotion]?.status.toUpperCase()}`}</option>)}</select><p className="control-help compact-help">{assetInfo?.reviewSupport?.emotions[session.emotion]?.note ?? (assetInfo?.capabilities.emotionBlend !== 'supported' ? t.emotionLimited : '')}</p><label className="range-label"><span>{t.intensity}</span><output>{session.intensity.toFixed(2)}</output></label><input type="range" min="0" max="1" step="0.01" value={session.intensity} aria-label={t.intensity} onChange={event => action(() => session.setIntensity(Number(event.target.value)))}/><div className="range-endpoints"><span>0.0</span><span>1.0</span></div></section>
               <section className="control-section"><div className="section-title"><h3>{t.energy}</h3><output className="section-value">{session.speechEnergy.toFixed(2)}</output></div><input type="range" min="0" max="1" step="0.01" value={session.speechEnergy} aria-label={t.energy} onChange={event => action(() => { const value = Number(event.target.value); if (value > 0 && session.state !== 'speaking') session.setState('speaking'); session.setSpeechEnergy(value); })}/><p className="control-help compact-help">{t.energyHelp}</p></section>
               <section className="control-section"><div className="section-title"><h3>{t.gaze}</h3><span className="section-number">03</span></div><label className="toggle-row"><span>{t.track}</span><input type="checkbox" disabled={!gazeSupported} checked={gazeSupported && session.pointerTracking} onChange={event => action(() => session.setTracking(event.target.checked))}/><span className="toggle-track"/></label><div className="gaze-layout"><div className="gaze-pad" role="slider" aria-disabled={!gazeSupported} tabIndex={gazeSupported ? 0 : -1} aria-label={t.gaze} aria-valuetext={`X ${frame.gaze.x.toFixed(2)}, Y ${frame.gaze.y.toFixed(2)}`} onPointerDown={event => { if (!gazeSupported) return; event.currentTarget.setPointerCapture(event.pointerId); directGaze(event); }} onPointerMove={event => { if (gazeSupported && event.buttons === 1) directGaze(event); }} onKeyDown={event => { if (!gazeSupported) return; const d = 0.1; const map: Record<string, [number, number]> = { ArrowLeft: [-d, 0], ArrowRight: [d, 0], ArrowUp: [0, -d], ArrowDown: [0, d] }; if (map[event.key]) { event.preventDefault(); const [x, y] = map[event.key]; action(() => session.gaze(frame.gaze.x + x, frame.gaze.y + y)); } }}><span className="gaze-axis axis-x"/><span className="gaze-axis axis-y"/><span className="gaze-target" style={{ left: `${(frame.gaze.x + 1) * 50}%`, top: `${(frame.gaze.y + 1) * 50}%` }}/></div><div className="gaze-values" dir="ltr"><span>X <output>{frame.gaze.x.toFixed(2)}</output></span><span>Y <output>{frame.gaze.y.toFixed(2)}</output></span><p dir={language === 'he' ? 'rtl' : 'ltr'}>{gazeSupported ? t.gazeHelp : t.gazeUnavailable}</p></div></div></section>
-              <section className="control-section gestures-section"><div className="section-title"><h3>{t.gesturesTitle}</h3><span className="section-number">04</span></div><div className="gesture-grid">{gestures.map(gesture => <button key={gesture} className={`gesture-button ${frame.gesture?.name === gesture ? 'active' : ''}`} disabled={!assetInfo || assetInfo.capabilities.gestures[gesture] === 'unsupported'} title={assetInfo?.capabilities.gestures[gesture] === 'unsupported' ? 'UNMAPPED' : undefined} onClick={() => action(() => session.gesture(gesture))}>{t.gestures[gesture]}{assetInfo?.capabilities.gestures[gesture] === 'unsupported' && <small>UNMAPPED</small>}</button>)}</div></section>
+              <section className="control-section gestures-section"><div className="section-title"><h3>{t.gesturesTitle}</h3><span className="section-number">04</span></div><div className="gesture-grid">{gestures.map(gesture => <button key={gesture} className={`gesture-button ${frame.gesture?.name === gesture ? 'active' : ''}`} disabled={status !== 'ready' || assetInfo?.capabilities.gestures[gesture] !== 'supported'} title={assetInfo?.capabilities.gestures[gesture] !== 'supported' ? 'UNMAPPED' : undefined} onClick={() => action(() => session.gesture(gesture))}>{t.gestures[gesture]}{assetInfo?.capabilities.gestures[gesture] !== 'supported' && <small>UNMAPPED</small>}</button>)}</div></section>
               <section className="control-section"><details className="pose-details"><summary>{t.pose}<span className="section-number">05</span></summary><p className="control-help">{t.poseHelp}</p>{(['headTilt', 'eyeOpenness', 'mouthOpen', 'smile', 'frown'] as const).map(field => <div className="pose-control" key={field}><label className="range-label"><span>{t[field]}{!poseSupported(field) && <small className="unmapped-control">UNMAPPED</small>}</span><span>{session.poseOverrides[field] === undefined ? t.auto : t.manual} <output>{frame[field].toFixed(2)}</output></span></label><input type="range" min={field === 'headTilt' ? -1 : 0} max="1" step="0.01" disabled={!poseSupported(field)} value={frame[field]} aria-label={t[field]} onChange={event => action(() => session.setPoseOverride(field, Number(event.target.value)))}/></div>)}{(['x', 'y'] as const).map(axis => <div className="pose-control" key={axis}><label className="range-label"><span>{axis === 'x' ? t.gazeX : t.gazeY}</span><output>{frame.gaze[axis].toFixed(2)}</output></label><input type="range" min="-1" max="1" step="0.01" disabled={!gazeSupported} value={frame.gaze[axis]} aria-label={axis === 'x' ? t.gazeX : t.gazeY} onChange={event => action(() => session.gaze(axis === 'x' ? Number(event.target.value) : frame.gaze.x, axis === 'y' ? Number(event.target.value) : frame.gaze.y))}/></div>)}<button className="export-pose" onClick={() => action(() => session.clearPoseOverrides())}><Icon name="reset" size={13}/>{t.clearPose}</button></details></section>
               <section className="control-section last-section"><label className="toggle-row awake-row"><span>{t.awake}</span><input type="checkbox" checked={session.state !== 'sleeping'} onChange={event => action(() => session.setAwake(event.target.checked))}/><span className="toggle-track"/></label><label className="toggle-row"><span>{t.reduced}</span><input type="checkbox" checked={session.reducedMotion} onChange={event => action(() => session.setReducedMotion(event.target.checked))}/><span className="toggle-track"/></label><button className="export-pose" onClick={() => saveJSON('amyu-avatar-pose.json', frame)}><Icon name="download" size={14}/>{t.snapshot}</button></section>
             </div>

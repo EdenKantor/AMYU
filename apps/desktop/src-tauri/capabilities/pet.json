@@ -1,0 +1,16 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "pet",
+  "description": "Local pet window: its own placement, size, minimize/close and the fixed developer lab command. No shell, filesystem or arbitrary execution permission.",
+  "local": true,
+  "windows": ["pet"],
+  "permissions": [
+    "allow-native-diagnostics",
+    "allow-open-avatar-lab",
+    "core:window:allow-start-dragging",
+    "core:window:allow-start-resize-dragging",
+    "core:window:allow-set-size",
+    "core:window:allow-minimize",
+    "core:window:allow-close"
+  ]
+}
