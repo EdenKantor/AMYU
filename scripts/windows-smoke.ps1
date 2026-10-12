@@ -14,7 +14,7 @@ try {
         Start-Sleep -Milliseconds 500
         $process.Refresh()
         if ($process.HasExited) { throw "AMYU exited early with code $($process.ExitCode)." }
-    } while ($process.MainWindowHandle -eq 0 -and [DateTime]::UtcNow -lt $deadline)
+    } while (($process.MainWindowHandle -eq 0 -or $process.MainWindowTitle -notlike 'AMYU*') -and [DateTime]::UtcNow -lt $deadline)
     if ($process.MainWindowHandle -eq 0) { throw 'AMYU did not expose a native window within 25 seconds.' }
     if ($process.MainWindowTitle -notlike 'AMYU*') { throw "Unexpected native window title: $($process.MainWindowTitle)" }
     Start-Sleep -Seconds 5
@@ -29,6 +29,14 @@ try {
         viteRunning = $false
         visualAcceptance = 'not performed by this process smoke check'
     } | ConvertTo-Json | Set-Content -LiteralPath $reportPath
+} catch {
+    [ordered]@{
+        executable = [IO.Path]::GetFileName($exe)
+        passed = $false
+        failure = $_.Exception.Message
+        visualAcceptance = 'not performed by this process smoke check'
+    } | ConvertTo-Json | Set-Content -LiteralPath $reportPath
+    throw
 } finally {
     if ($process -and -not $process.HasExited) {
         $null = $process.CloseMainWindow()
