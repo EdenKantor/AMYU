@@ -1,8 +1,8 @@
 # Native validation record
 
-## Revised Pet Shell milestone — 2026-10-11
+## Revised Pet Shell milestone — updated 2026-10-13
 
-The product entry point is now the compact Pet Shell. Avatar Lab remains a separate developer window. Native configuration enables transparency, frameless presentation, always-on-top, resize bounds and NSIS packaging. Those settings are implemented, but this host has not yet run the native app successfully.
+The product entry point is now the compact Pet Shell. Avatar Lab remains a separate developer window. Native configuration enables transparency, frameless presentation, always-on-top, resize bounds and NSIS packaging. **The hosted Windows build passed and its downloaded production EXE runs successfully on this host.** Local Rust compilation remains blocked; manual acceptance is partial.
 
 The existing toolchain was reused from the earlier workspace through `native.ps1 -RustRoot`; no Rust installation or security configuration was changed. Verified versions: rustc 1.99.0 and cargo 1.99.0. Native outputs were directed to this repository's ignored `work/native-target`.
 
@@ -11,12 +11,32 @@ The existing toolchain was reused from the earlier workspace through `native.ps1
 | `cargo fmt --check` | PASS |
 | `cargo check --locked` | Windows Application Control blocked `debug/build/generic-array-addf822b734c4982/build-script-build`, error **4551** |
 | `native.ps1 build` (locked Tauri release + NSIS) | Frontend built; Application Control blocked `release/build/zmij-b6b5019f2cb5540e/build-script-build`, error **4551** |
-| Local native Rust tests / executable / installer | Not completed because dependency build scripts are blocked |
-| GitHub Windows compile / artifacts | Workflow added; pending first verified result in [build report](build-report.md) |
+| Local native compilation/tests/packaging | Not completed because dependency build scripts are blocked |
+| GitHub Windows compile/tests | PASS, all 11 native tests in [run 38274777583](https://github.com/EdenKantor/AMYU/actions/runs/38274777583), including real Windows file save/flush/reload and corrupted-data fallback |
+| GitHub release packaging | PASS in the same run: optimized Windows EXE and NSIS installer uploaded |
+| GitHub process smoke | PASS: native title/window and process lifetime, no Vite. This check does not assert visual acceptance |
+| Local downloaded EXE launch | PASS on October 12 and 13; bundled production route, robot animation and compact composer |
 
-Logs are retained locally in ignored `work/native-check.log` and `work/native-build.log`. The newer attempts fail before compiling AMYU's native source, so they establish the continuing host-policy blocker, not that the native source is error-free. Hosted CI is responsible for the remaining compilation checks. No Application Control policy or other host security control was disabled, weakened or bypassed. Package scripts no longer request a PowerShell execution-policy override.
+Logs are retained locally in ignored `work/native-check.log` and `work/native-build.log`. The local attempts fail before compiling AMYU's native source; hosted Windows CI subsequently compiled and tested that source and built the installer. A separate pnpm argument-forwarding error was fixed by keeping the literal locked-build command in a package script. No Application Control policy or other host security control was disabled, weakened or bypassed. Package scripts no longer request a PowerShell execution-policy override.
 
-Native acceptance still requires actual launch, rendered animation, compact composer/mock flow, drag, resize, close/relaunch persistence, always-on-top/transparency and separate Avatar Lab checks. Browser validation cannot certify these Windows behaviors. Multi-monitor/DPI logic has focused Rust tests but still requires real hardware validation.
+### Local native observation record
+
+Observer: Codex via the Windows Computer Use skill. Dates: **2026-10-12–13**, Asia/Jerusalem. OS: Windows 11 Core, 25H2, build **26200.9457**. Installed WebView2 directory: **154.0.4258.62**. Exact source, artifact URLs and verified EXE/installer hashes are in the [build report](build-report.md#download-and-provenance). The EXE was extracted under ignored `work/windows-ci-ba76f62/`; no installer was run. Ports 1420 and 5173 had no listening development servers; native accessibility exposed `http://tauri.localhost/`.
+
+| Native observation | Result |
+| --- | --- |
+| Immediate animated pet, compact shell, transparent background and no title bar | Observed |
+| Type/Enter; local listening → thinking → speaking → idle | Observed with native state images on October 12 |
+| Move handle | Observed origin change `(3053, 26)` → `(2943, 71)` on October 13 |
+| L size preset | Observed native size change `373 × 455` → `480 × 620`, readable composer and full robot |
+| Close/relaunch persistence | PASS: saved JSON and relaunched capture both `(2943, 71, 480, 620)` |
+| Sleep and click-to-wake | Observed closed-eye hold and return to idle |
+| Separate Avatar Lab | Decorated window, production `index.html?mode=lab`, working sleeping control; closing lab leaves pet running |
+| Resize grip | Unresolved: automation did not demonstrate a size change |
+| Always-on-top against foreground window; taskbar recovery; S/M presets; native acting/interruption stress | Pending conclusive native checks |
+| Hardware monitor/DPI changes; sustained idle/reduced motion; installer installation | Not performed |
+
+The final lab-window automation encountered `coordinate input geometry is unavailable`, followed by `foreground window did not report a process id` during recovery, so further UI input stopped. No Windows security setting was changed. Multi-monitor/DPI and invalid geometry have focused Rust tests; those tests do not replace hardware checks. Native captures and remaining acceptance are linked from the build report and [manual checklist](../tests/manual-acceptance.md).
 
 ## Preserved earlier native investigation
 

@@ -1,6 +1,6 @@
 # AMYU manual acceptance
 
-Updated **2026-10-10**. Record observer, date, OS/browser, exact asset/runtime, elapsed duration and result for each completed visual check. A checked review item means the review was performed, not that its artistic result passed. An unchecked box is pending. Automated values are not proof of rendered quality.
+Updated **2026-10-13**. Record observer, date, OS/browser, exact asset/runtime, elapsed duration and result for each completed visual check. A checked review item means the review was performed, not that its artistic result passed. An unchecked box is pending. Automated values are not proof of rendered quality.
 
 ## Current milestone — Windows Desktop Pet Shell
 
@@ -10,20 +10,20 @@ Record current build and launch evidence in [native validation](../docs/native-v
 
 ### Native acceptance checklist
 
-- [ ] Build the Windows EXE and installer with the exact source commit recorded.
-- [ ] Launch the production EXE on an authorized Windows 11 desktop with Vite stopped; record OS, WebView2 version, artifact hash and observer.
-- [ ] Confirm the main window is the compact Pet Shell, with the current robot visible and animated immediately after loading.
+- [x] Build the Windows EXE and installer with the exact source commit recorded. CI run 38274777583, source `ba76f627e0873210cd4bebe81daaf80a599a14b1`; hashes and artifact link in build report.
+- [x] Launch the production EXE on an authorized Windows 11 desktop with Vite stopped; record OS, WebView2 version, artifact hash and observer. Codex via Windows Computer Use, October 12–13; environment in native validation.
+- [x] Confirm the main window is the compact Pet Shell, with the current robot visible and animated immediately after loading.
 - [ ] Confirm transparent background, no normal title bar, and always-on-top behavior against another ordinary app window.
 - [ ] Drag the top handle; confirm normal composer input remains usable and note any unwanted focus behavior.
-- [ ] Resize with the bottom-right grip and S/M/L presets; verify readable composer, uncropped robot/props and bounded sizes.
-- [ ] Close/relaunch after moving and resizing; verify both position and size restore.
+- [ ] Resize with the bottom-right grip and S/M/L presets; verify readable composer, uncropped robot/props and bounded sizes. L preset passed natively at 480 × 620; grip automation was inconclusive, S/M native checks remain.
+- [x] Close/relaunch after moving and resizing; verify both position and size restore. Native capture and saved JSON matched `(2943, 71, 480, 620)` on October 13.
 - [ ] Check missing/malformed saved geometry, a disconnected monitor, negative monitor coordinates and different DPI settings; record which cases were actually tested.
 - [ ] Toggle the compact composer, enter text, send with Enter/button, dismiss the reply, and verify the mic placeholder requests no access.
-- [ ] Observe listening → thinking → speaking → idle in the native pet, including the explicit local placeholder reply and final quiet rest.
-- [ ] Review acting, sleep, wake, avatar click, interruption by new input, and repeated sends for stale poses or speech energy.
-- [ ] Open Avatar Lab from the DEV menu; confirm it has a separate decorated window, functional controls and independent lifecycle.
+- [x] Observe listening → thinking → speaking → idle in the native pet, including the explicit local placeholder reply and final quiet rest. October 12 native captures retained.
+- [ ] Review acting, sleep, wake, avatar click, interruption by new input, and repeated sends for stale poses or speech energy. Native sleep/click-to-wake observed October 13; broader sequence remains pending.
+- [x] Open Avatar Lab from the DEV menu; confirm it has a separate decorated window, functional controls and independent lifecycle. Native sleeping control changed pose; closing lab left pet running.
 - [ ] Minimize/recover from the taskbar, close the pet, and check remaining lab/process behavior.
-- [ ] Capture native pet, compact composer, resized pet and separate Avatar Lab evidence; identify browser images separately when used.
+- [ ] Capture native pet, compact composer, resized pet and separate Avatar Lab evidence; identify browser images separately when used. Native pet/composer/lab captured. Resized layout image is browser-only; native L size and restart were observed but its capture contained unrelated app content and was not retained.
 - [ ] Record reduced-motion and sustained native idle behavior for a stated observed duration.
 - [ ] Obtain the user's review of this milestone before starting the next product stage.
 

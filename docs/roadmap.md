@@ -18,6 +18,8 @@ Current milestone: **Windows Native Desktop Pet Shell**, following the user's re
 
 ## Current acceptance rule
 
+October 13 evidence: Windows CI compilation, 11 Rust tests, EXE/NSIS packaging and process smoke passed. The downloaded EXE runs locally; composer flow, drag, L size preset, saved geometry after restart, sleep/wake and separate lab were observed. Local compilation still hits 4551. Grip resize, foreground always-on-top, taskbar recovery, remaining native interaction stress, monitor/DPI hardware cases and sustained native review remain open. The next recommended scope is **Windows Pet acceptance and polish**, subject to the user's decision.
+
 The native app must open the **Pet Shell** by default, render and animate the robot, accept text in the compact bar, and demonstrate listening → thinking → speaking → idle. Acting and sleeping must also be available in the product shell. Dragging, real native resizing and restoration after restart require native acceptance; a browser layout check is useful but insufficient.
 
 Build tests establish code and packaging health. A CI process launch establishes only the observations recorded for that run. Neither substitutes for a manual desktop review. Track exact evidence in [native validation](native-validation.md), [build report](build-report.md), and [manual acceptance](../tests/manual-acceptance.md). Preserve the historical 4551 record; fix repository issues and use Windows CI while respecting host policy.

@@ -4,6 +4,8 @@ AMYU is a desktop-first embodied companion. The current milestone builds the **W
 
 The shell uses Tauri 2, React and the existing renderer-independent avatar architecture. No API key is required. Onboarding, AI providers, microphone streaming, TTS, memory, vision, Skills and Connectors remain out of scope.
 
+**Windows prototype available:** [successful build](https://github.com/EdenKantor/AMYU/actions/runs/38274777583) · [EXE and installer artifact](https://github.com/EdenKantor/AMYU/actions/runs/38274777583/artifacts/11758464133). The CI-built EXE was launched locally and native composer flow, drag, large size preset, restart persistence and separate lab were observed. Local compilation remains blocked by Windows error 4551. Manual acceptance is partial; see the [current report](docs/build-report.md) before treating the prototype as fully validated.
+
 ## Run
 
 Use Node.js **22.12+** and **pnpm 11.19.0**. Native Windows development also requires Rust, Microsoft C++ build tools and WebView2; see [Windows build instructions](docs/windows-build.md).

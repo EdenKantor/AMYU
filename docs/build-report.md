@@ -1,6 +1,6 @@
 # Desktop Pet Shell build report
 
-Updated **2026-10-11**. The revised milestone makes Pet Shell the native product entry point and retains Avatar Lab in a separate window/route. The current robot and renderer-independent architecture are preserved. No onboarding, provider, microphone stream, TTS, memory, vision or connectors were added.
+Updated **2026-10-13**. The revised milestone makes Pet Shell the native product entry point and retains Avatar Lab in a separate window/route. The current robot and renderer-independent architecture are preserved. No onboarding, provider, microphone stream, TTS, memory, vision or connectors were added. Implementation and Windows packaging are delivered; manual acceptance remains partial.
 
 ## Current milestone results
 
@@ -10,8 +10,34 @@ Updated **2026-10-11**. The revised milestone makes Pet Shell the native product
 | Native Rust formatting | **PASS** with the existing contained Rust 1.99.0 toolchain |
 | Local debug native compile | **BLOCKED**, Application Control error 4551 on `generic-array` build script |
 | Local native release / NSIS build | **BLOCKED**, Application Control error 4551 on `zmij` build script; frontend build passed |
-| GitHub Windows build | Workflow implemented; first run and artifacts pending verification |
-| Native visual/interaction acceptance | Pending an executable that can run in an authorized Windows environment |
+| GitHub Rust compilation/tests | **PASS**, all 11 native tests in [run 38274777583](https://github.com/EdenKantor/AMYU/actions/runs/38274777583) |
+| GitHub Windows packaging | **PASS**, release EXE and `AMYU_0.1.0_x64-setup.exe` built and uploaded in the same successful run |
+| Production process smoke | **PASS**, AMYU native window created, process stayed alive, no Vite; packaged report explicitly excludes visual acceptance |
+| Local launch of downloaded CI EXE | **PASS**, production `http://tauri.localhost/`, visible animated robot, no development server |
+| Native visual/interaction acceptance | **PARTIAL**, composer/state flow, drag, large size preset, restart geometry and separate lab observed; remaining checks listed below |
+
+## Download and provenance
+
+- [Successful Windows workflow run](https://github.com/EdenKantor/AMYU/actions/runs/38274777583)
+- [Windows EXE and NSIS artifact](https://github.com/EdenKantor/AMYU/actions/runs/38274777583/artifacts/11758464133), retained for 30 days by the workflow
+- Source commit: `ba76f627e0873210cd4bebe81daaf80a599a14b1`. Subsequent documentation/evidence commits do not change this binary's source provenance.
+- Artifact: `AMYU-Windows-x64-ba76f627e0873210cd4bebe81daaf80a599a14b1`.
+- EXE SHA-256: `318ee19a8f4a4cda28c8a0e0f42e1a37299991cf4f482b1caf2f705bd803e0a0`.
+- Installer SHA-256: `1dc0a2d8e736c98b0f4df1be69d9ece67f67f36a5444285f71e067969cedcd72`.
+
+Downloaded files matched the packaged checksums. The portable EXE was launched locally; installer installation/uninstallation was not tested. This is an unsigned prototype artifact, not a published release.
+
+## Observed native behavior and remaining acceptance
+
+Codex inspected the production app through Windows Computer Use on October 12–13, 2026. The pet renders over the desktop with no normal title bar. Native typing, local listening → thinking → speaking → idle, and sleep/click-to-wake were observed. The handle changed the window origin from `(3053, 26)` to `(2943, 71)`. The L preset changed the native size from `373 × 455` to `480 × 620`. Closing and relaunching restored exactly `(2943, 71, 480, 620)`, matching the saved JSON.
+
+Avatar Lab opened in a separate decorated production window, its sleeping control changed the rendered pose, and closing it left the pet running. Local compilation still fails with 4551; that does not prevent this host from running the downloaded CI EXE.
+
+The bottom-right grip automation did not establish a resize; this remains unresolved rather than passed. Always-on-top is configured but foreground overlap has not been conclusively validated. S/M presets, taskbar recovery, native acting/interruption stress, multi-monitor/DPI hardware changes, installer behavior and sustained native idle/reduced-motion review remain pending. The UI helper eventually reported `coordinate input geometry is unavailable`, then `foreground window did not report a process id` during lab-window targeting; UI input stopped after the recovery failed. No app defect is inferred solely from those helper errors.
+
+Native evidence: [pet](screenshots/pet-shell/native-pet.png), [composer](screenshots/pet-shell/native-composer.png), [thinking](screenshots/pet-shell/native-thinking.png), [speaking](screenshots/pet-shell/native-speaking.png), [return to idle](screenshots/pet-shell/native-return.png), [separate Avatar Lab](screenshots/pet-shell/native-avatar-lab.png). The [larger layout image](screenshots/pet-shell/browser-resized.jpg) is **browser evidence only**; no clean native resized screenshot was retained because the transparent capture included unrelated application content. The native size and restart observations above were still verified directly.
+
+Recommended next milestone: **Windows Pet acceptance and polish**—resolve grip resizing, test remaining native interactions and monitor/DPI cases, then obtain user visual acceptance. Stop here for the user's decision; onboarding and providers remain separately gated.
 
 Pet Shell uses a product `PetSession` with the existing EmbodimentDirector, LocalLifeEngine and Rive renderer. It provides a compact composer, explicitly local silent mock replies, six semantic states, sleep/wake, acting demonstration and a developer entry to Avatar Lab. The native layer owns bounded geometry, work-area/DPI restoration and debounced persistence. The pet window is configured transparent, frameless and always on top; native drag and resize use scoped Tauri APIs.
 
